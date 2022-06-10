@@ -1,0 +1,225 @@
+*{
+	padding: 0;
+	margin: 0;
+  box-sizing: border-box;
+  font-weight: 300;
+}
+
+header{
+  background-image: url(../img/back2.jpg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation-name: image;
+  animation-duration: 15s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes image{
+  0%{
+    background-image: url(../img/back2.jpg);
+  }
+  100%{
+    background-image: url(../img/back3.jpg);
+  }
+}
+
+.logo{
+  float: left;
+  padding: 10px 30px;
+}
+
+.logo a {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  margin-right: 20px;
+}
+
+.logo a i {
+  font-size: 4.5rem;
+  color: #222831;
+}
+
+.hamburger,
+.close  {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.hamburger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1.2rem 1.8rem 0 0;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1.8rem 2rem 0 0;
+}
+
+.navigation-menu {
+  float: right;
+  display: flex;
+  align-items: center;
+  min-height: 90px;
+}
+
+.navigation-menu a {
+  text-decoration: none;
+  margin-left: 10px;
+  color: #222831;
+  text-transform: uppercase;
+  font-size: 15px;
+  padding: 10px 10px;
+}
+
+.top-heading {
+  padding-top: 13%;
+  padding-left: 25%;
+  padding-right: 25%;
+  text-align: center;
+}
+
+.top-heading h1 {
+  font-weight: 300;
+}
+
+.sub-heading {
+	padding-top: 5%;
+  width: 100%;
+  text-align: center;
+}
+.sub-heading a {
+	width: auto;
+	background-color: transparent;
+  padding: 0.5% 1%;
+  margin-top: 5%;
+  border: 2px solid black;
+  color: #222831;
+  margin-right: 2%;
+  text-decoration: none;
+}
+
+.sub-heading a:hover {
+  text-decoration: none;
+}
+
+.next {
+  text-align: center;
+  padding-top: 5%;
+}
+
+.next button {
+  font-weight: 300;
+}
+
+.next button:hover {
+  background-color: transparent;
+  color: rgb(51, 115, 255);
+}
+
+#services {
+  padding-top: 5%;
+}
+
+.heading p {
+font-size: 1.2rem;
+}
+
+.card a {
+  font-weight: 300;
+  border-radius: 20px;
+}
+
+.card a:hover {
+  background-color: transparent;
+  color: rgb(51, 115, 255);
+}
+
+.form {
+  text-align: center;
+  width: 100%;
+}
+
+.form label {
+  padding-left: 2%;
+}
+
+.form input {
+  padding: 1% 1%;
+  outline: none;
+}
+
+.form button {
+  margin-left: 2%;
+  font-weight: 300;
+}
+
+.form button:hover {
+  background-color: transparent;
+  color: rgb(51, 115, 255);
+}
+
+#about-us {
+  padding-top: .2%;
+}
+
+.icons {
+  text-align: center;
+}
+
+.icons i {
+  font-size: 3.5rem;
+  cursor: pointer;
+  padding-left: 2%;
+}
+
+.facebook {
+	color: #3b5998;
+}
+
+.instagram {
+	color: rgb(247, 102, 191);
+}
+
+.twitter {
+	color: #33ccff;
+}
+
+.youtube {
+	color: #cc181e;
+}
+
+footer {
+  background-color: #ffc251;
+}
+
+li {
+  list-style: none;
+}
+
+li a {
+  text-decoration: none;
+  color: #222831;
+  margin-left: -10%;
+}
+
+.subscribe button {
+  border-radius: 20px;
+  margin-left: -2%;
+  font-weight: 300;
+}
+
+.subscribe button:hover {
+  background-color: transparent;
+  color: #222831;
+}
+
+.foot {
+  margin-left: -2%;
+}

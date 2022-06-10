@@ -1,0 +1,25 @@
+@media screen and (max-width:992px) {
+  .navigation-menu {
+  width: 100%;
+  flex-direction: column;
+  display: none;
+  }
+
+  .navigation-menu li {
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.4); 
+  }
+
+  .hamburger{
+    display: block;
+  }
+
+  /* .show{
+    display: flex;
+  }
+
+  .hide{
+    display: none; 
+  } */
+}

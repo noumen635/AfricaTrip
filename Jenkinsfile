@@ -12,7 +12,7 @@ pipeline {
         
         expression {
           
-          CODE_CHANGES == true
+          CODE_CHANGES == false
           
         }
         

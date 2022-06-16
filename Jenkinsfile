@@ -8,7 +8,7 @@ pipeline {
       
       steps {
         echo 'building the application...'
-        sh "docker build -t noumendarryl/my-multibranch-pipeline:${BUILD_NUMBER} ."
+        sh "docker build -t noumendarryl/my-multibranch-pipeline:${BUILD_NUMBER}"
       }
       
     }

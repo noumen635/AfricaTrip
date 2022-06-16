@@ -8,11 +8,7 @@ pipeline {
       
       steps {
         echo 'building the application...'
-        
-        script {
-          app = docker.build("my-multibranch-pipeline")
-        }
-   
+        sh "docker build -t noumendarryl/my-multibranch-pipeline:${BUILD_NUMBER} ."
       }
       
     }
@@ -29,13 +25,10 @@ pipeline {
       
       steps {
         echo 'packaging the application...'
-        
-        script {
-          docker.withRegistry('', 'DockerID')
-          app.push("${BUILD_NUMBER}")
-          app.push("latest")
+        withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
+          sh "docker login -u noumendarryl -p ${Docker_PWD}"
         }
-        
+        sh "docker push noumendarryl/my-multibranch-pipeline:${BUILD_NUMBER}"
       }
       
     }

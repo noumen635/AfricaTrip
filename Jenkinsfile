@@ -8,7 +8,7 @@ pipeline {
       
       steps {
         echo 'building the application...'
-        sh "docker build -t noumendarryl/my-multibranch-pipeline:1.0"
+        sh "docker build -t noumendarryl/my-multibranch-pipeline:${BUILD_NUMBER} ."
       }
       
     }
@@ -28,7 +28,7 @@ pipeline {
         withCredentials([string(credentialsId: 'DockerID', variable: 'dockerpwd')]) {
           sh "docker login -u noumendarryl -p ${dockerpwd}"
         }
-        sh "docker push noumendarryl/my-multibranch-pipeline:1.0"
+        sh "docker push noumendarryl/my-multibranch-pipeline:${BUILD_NUMBER}"
       }
       
     }

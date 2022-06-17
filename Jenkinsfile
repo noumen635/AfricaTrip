@@ -9,6 +9,7 @@ pipeline {
       steps {
         echo 'building the application...'
         sh "docker build -t noumendarryl/africatrip:${BUILD_NUMBER} ."
+        sh "docker build -t noumendarryl/africatrip:latest ."
       }
       
     }

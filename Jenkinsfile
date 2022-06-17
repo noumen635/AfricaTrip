@@ -6,10 +6,8 @@ pipeline {
     
     stage('SonarQube analysis') {
       
-      tools {
-        sonarQube 'SonarQubeScanner-4.7.0'
-      }
-      
+      def scannerHome = tool name: 'SonarQubeScanner-4.7.0', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
+  
       steps {
         withSonarQubeEnv('sonarqube-9.5') { 
           // If you have configured more than one global server connection, you can specify its name
@@ -19,7 +17,6 @@ pipeline {
       
     }
 
-    
     stage("build") {
  
       steps {

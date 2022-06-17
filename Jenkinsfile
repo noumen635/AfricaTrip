@@ -4,8 +4,23 @@ pipeline {
   
   stages {
     
-    stage("build") {
+    stage('SonarQube analysis') {
       
+      def scannerHome = tool 'SonarQubeScanner-4.7.0';
+      steps {
+        
+        withSonarQubeEnv('sonarqube-9.5') { 
+          // If you have configured more than one global server connection, you can specify its name
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+        
+      }
+      
+    }
+
+    
+    stage("build") {
+ 
       steps {
         echo 'building the application...'
         sh "docker build -t noumendarryl/africatrip:${BUILD_NUMBER} ."

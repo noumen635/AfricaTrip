@@ -21,7 +21,7 @@ pipeline {
       
     }
     
-    stage("package") {
+    stage("artifact storage") {
       
       steps {
         echo 'packaging the application...'
@@ -29,6 +29,12 @@ pipeline {
           sh "docker login -u noumendarryl -p ${Docker_PWD}"
         }
         sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
+    }
+      
+    stage("deploy on Docker") {
+      
+     steps {
+        sh "docker compose up -d"
       }
       
     }

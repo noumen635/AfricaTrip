@@ -29,6 +29,7 @@ pipeline {
           sh "docker login -u noumendarryl -p ${Docker_PWD}"
         }
         sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
+      }
     }
       
     stage("deploy on Docker") {

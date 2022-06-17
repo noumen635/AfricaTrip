@@ -8,7 +8,10 @@ pipeline {
       
       steps {
         
-        def scannerHome = tool 'SonarQubeScanner-4.7.0';
+        script {
+          def scannerHome = tool 'SonarQubeScanner-4.7.0';
+          echo "${scannerHome}"
+        }
         
         echo "${scannerHome}"
         

@@ -8,9 +8,9 @@ pipeline {
       
       steps {
         
-        script {
-          def scannerHome = tool 'SonarQubeScanner-4.7.0';
-        }
+        def scannerHome = tool 'SonarQubeScanner-4.7.0';
+        
+        echo "${scannerHome}"
         
         withSonarQubeEnv('sonarqube-9.5') { 
           // If you have configured more than one global server connection, you can specify its name

@@ -6,17 +6,17 @@ pipeline {
     
     stage('SonarQube analysis') {
       
-      def scannerHome = tool 'SonarQubeScanner-4.7.0';
-      
       steps {
+        
+        script {
+          def scannerHome = tool 'SonarQubeScanner-4.7.0';
+        }
+        
         withSonarQubeEnv('sonarqube-9.5') { 
           // If you have configured more than one global server connection, you can specify its name
-          sh "${scannerHome}/bin/sonar-scanner \
-            -D sonar.login=admin \
-            -D sonar.password=FR1307Ky# \
-            -D sonar.projectKey=africatrip \
-            -D sonar.host.url=http://35.219.189.235:9000/"
+          sh "${scannerHome}/bin/sonar-scanner"
         }
+        
       }
       
     }

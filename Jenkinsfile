@@ -6,10 +6,17 @@ pipeline {
     
     stage('SonarQube analysis') {
       
-      def scannerHome = tool name: 'SonarQubeScanner-4.7.0', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-      withSonarQubeEnv('sonarqube-9.5') { 
-        // If you have configured more than one global server connection, you can specify its name
-        sh "sonar-scanner"
+      def scannerHome = tool 'SonarQubeScanner-4.7.0'
+      
+      steps {
+        withSonarQubeEnv('sonarqube-9.5') { 
+          // If you have configured more than one global server connection, you can specify its name
+          sh "${scannerHome}/bin/sonar-scanner \
+            -D sonar.login=admin \
+            -D sonar.password=FR1307Ky# \
+            -D sonar.projectKey=africatrip \
+            -D sonar.host.url=http://35.219.189.235:9000/"
+        }
       }
       
     }
@@ -42,13 +49,14 @@ pipeline {
         sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
         sh "docker push noumendarryl/africatrip:latest"
       }
+      
     }
       
     stage("deploy on Docker") {
       
      steps {
         sh "docker-compose up -d"
-      }
+     }
       
     }
     

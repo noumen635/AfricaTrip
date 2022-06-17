@@ -1,4 +1,3 @@
-FROM openjdk:8
-EXPOSE 8080
-ADD target/my-multibranch-pipeline.jar my-multibranch-pipeline.jar 
-ENTRYPOINT ["java", "-jar", "/my-multibranch-pipeline.jar"]
+FROM nginx:alpine
+EXPOSE 80
+COPY . /usr/share/nginx/html

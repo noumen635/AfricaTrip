@@ -11,13 +11,11 @@ pipeline {
         script {
           def scannerHome = tool 'SonarQubeScanner-4.7.0';
           echo "${scannerHome}"
-        }
-        
-        echo "${scannerHome}"
-        
-        withSonarQubeEnv('sonarqube-9.5') { 
-          // If you have configured more than one global server connection, you can specify its name
-          sh "${scannerHome}/bin/sonar-scanner"
+          withSonarQubeEnv('sonarqube-9.5') { 
+            // If you have configured more than one global server connection, you can specify its name
+            sh "${scannerHome}/bin/sonar-scanner"
+          }
+          
         }
         
       }

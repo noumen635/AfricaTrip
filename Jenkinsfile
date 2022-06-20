@@ -3,7 +3,7 @@ pipeline {
   agent any
   
   tools {
-    nodejs 'NodeJS-18.4.0'
+    nodejs 'NodeJS-15.14.0'
   }
   
   stages {
@@ -60,7 +60,7 @@ pipeline {
     stage("deploy on Docker") {
       
      steps {
-        sh "docker-compose up -d"
+        sh "docker compose up -d"
      }
       
     }

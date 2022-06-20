@@ -2,6 +2,10 @@ pipeline {
   
   agent any
   
+  tools {
+    nodejs 'NodeJS-18.4.0'
+  }
+  
   stages {
     
     stage('SonarQube analysis') {

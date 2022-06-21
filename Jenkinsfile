@@ -60,7 +60,7 @@ pipeline {
     stage("deploy on Docker") {
       
      steps {
-       def container = sh(returnStdout: true, script: "docker ps | grep africatrip")
+       def container = sh(returnStdout: true, script: "docker ps | grep africatrip");
        
        if (container) {
          sh "docker stop africatrip"         

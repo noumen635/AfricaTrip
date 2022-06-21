@@ -74,6 +74,10 @@ pipeline {
            sh "docker rm africatrip"
          }
 
+         withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
+           sh "docker login -u noumendarryl -p ${Docker_PWD}"
+         }
+         
          sh "docker run --name=africatrip africatrip:latest"
        }
        

@@ -60,19 +60,22 @@ pipeline {
     stage("deploy on Docker") {
       
      steps {
-       def container = sh(returnStdout: true, script: "docker ps | grep africatrip");
        
-       if (container) {
-         sh "docker stop africatrip"         
+       script {
+         def container = sh(returnStdout: true, script: "docker ps | grep africatrip")
+
+         if (container) {
+           sh "docker stop africatrip"         
+         }
+
+         def existing = sh (returnStdout: true, script: "docker container ls -a -f name=africatrip")
+
+         if (existing) {
+           sh "docker rm africatrip"
+         }
+
+         sh "docker run 'africatrip'"
        }
-       
-       def existing = sh (returnStdout: true, script: "docker container ls -a -f name=africatrip")
-       
-       if (existing) {
-         sh "docker rm africatrip"
-       }
-       
-       sh "docker run 'africatrip'"
        
      }
       

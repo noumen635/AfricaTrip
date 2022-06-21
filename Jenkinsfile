@@ -62,7 +62,7 @@ pipeline {
      steps {
        
        script {
-         def container = sh(returnStdout: true, script: "docker ps -f name=africatrip")
+         def container = sh(returnStdout: true, script: "docker ps -q -f name=africatrip")
 
          if (container) {
            sh "docker stop africatrip"        

@@ -74,7 +74,7 @@ pipeline {
            sh "docker rm africatrip"
          }
 
-          sh "docker run --name=africatrip noumendarryl/africatrip:latest -p 80:80"
+          sh "docker run -p 80:80 --name=africatrip noumendarryl/africatrip:latest"
          
        }
        

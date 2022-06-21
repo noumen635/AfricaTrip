@@ -68,7 +68,7 @@ pipeline {
            sh "docker stop africatrip"        
          }
 
-         def existing = sh (returnStdout: true, script: "docker container ls -a -f name=africatrip")
+         def existing = sh (returnStdout: true, script: "docker container ls -a -q -f name=africatrip")
 
          if (existing) {
            sh "docker rm africatrip"

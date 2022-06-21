@@ -60,7 +60,8 @@ pipeline {
     stage("deploy on Docker") {
       
      steps {
-        sh "docker-compose up -d"
+       sh "docker rm africatrip"
+       sh "docker run --name 'africatrip'"
      }
       
     }

@@ -32,6 +32,8 @@ pipeline {
         echo 'building the application...'
         sh "docker build -t noumendarryl/africatrip:${BUILD_NUMBER} ."
         sh "docker build -t noumendarryl/africatrip:latest ."
+        sh "docker build . -t 35.219.189.235:8081/africatrip:${BUILD_NUMBER}"
+        sh "docker build . -t 35.219.189.235:8081/africatrip:latest"
       }
       
     }
@@ -53,6 +55,9 @@ pipeline {
         }
         sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
         sh "docker push noumendarryl/africatrip:latest"
+        sh "docker login -u admin 35.219.189.235:8081"
+        sh "docker push 35.219.189.235:8081/africatrip:${BUILD_NUMBER}"
+        sh "docker push 35.219.189.235:8081/africatrip:latest"
       }
       
     }

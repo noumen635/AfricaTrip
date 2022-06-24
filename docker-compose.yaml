@@ -4,10 +4,3 @@ services:
     image: noumendarryl/africatrip
     ports:
       - 80:80
-  nginx-vts-exporter:
-    container_name: nginx-vts-exporter
-    image: sophos/nginx-vts-exporter:latest
-    environment:
-      NGINX_STATUS: http://35.219.189.235:80/status/format/json
-    ports:
-      - 9913:9913

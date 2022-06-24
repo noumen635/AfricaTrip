@@ -100,6 +100,12 @@ pipeline {
       
     }
     
+    stage("Email Notification") {
+      emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS : Check console output at $BUILD_URL to view the results. Please note that this is an automated email.''', 
+      subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', 
+      to: 'darryl.noumen@2025.ucac-icam.com'
+    }
+    
   }
   
 }

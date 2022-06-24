@@ -105,6 +105,7 @@ pipeline {
 
          sh "docker run -d -p 80:80 --name=africatrip noumendarryl/africatrip:latest"
          sh "docker run -d -p 9913:9913 --name=nginx-vts-exporter --env NGINX_STATUS=http://35.219.189.235:80/status/format/json sophos/nginx-vts-exporter:latest"
+         sh "nginx -V"
        }
        
      }

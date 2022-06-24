@@ -82,18 +82,29 @@ pipeline {
        
        script {
          def container = sh(returnStdout: true, script: "docker ps -q -f name=africatrip")
+         def container_1 = sh(returnStdout: true, script: "docker ps -q -f name=nginx-vts-exporter")
 
          if (container) {
            sh "docker stop africatrip"        
          }
+         
+         if (container_1) {
+           sh "docker stop nginx-vts-exporter"        
+         }
 
-         def existing = sh (returnStdout: true, script: "docker container ls -a -q -f name=africatrip")
+         def is_existing = sh (returnStdout: true, script: "docker container ls -a -q -f name=africatrip")
+         def is_existing_1 = sh (returnStdout: true, script: "docker container ls -a -q -f name=nginx-vts-exporter")
 
-         if (existing) {
+         if (is_existing) {
            sh "docker rm africatrip"
+         }
+         
+          if (is_existing_1) {
+           sh "docker rm nginx-vts-exporter"
          }
 
          sh "docker run -d -p 80:80 --name=africatrip noumendarryl/africatrip:latest"
+         sh "docker run -d -p 9913:9913 --name=nginx-vts-exporter --env NGINX_STATUS=http://35.219.189.235:80/status/format/json sophos/nginx-vts-exporter:latest"
        }
        
      }

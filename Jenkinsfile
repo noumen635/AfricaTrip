@@ -32,8 +32,6 @@ pipeline {
         echo 'building the application...'
         sh "docker build -t noumendarryl/africatrip:${BUILD_NUMBER} ."
         sh "docker build -t noumendarryl/africatrip:latest ."
-        sh "docker build . -t 35.219.189.235:8081/africatrip:${BUILD_NUMBER}"
-        sh "docker build . -t 35.219.189.235:8081/africatrip:latest"
       }
       
     }
@@ -55,9 +53,6 @@ pipeline {
         }
         sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
         sh "docker push noumendarryl/africatrip:latest"
-        sh "docker login -u admin 35.219.189.235:8081"
-        sh "docker push 35.219.189.235:8081/africatrip:${BUILD_NUMBER}"
-        sh "docker push 35.219.189.235:8081/africatrip:latest"
       }
       
     }
@@ -80,11 +75,6 @@ pipeline {
          }
 
          sh "docker run -d -p 80:80 --name=africatrip noumendarryl/africatrip:latest"
-         sh "mkdir share"
-         sh "touch share/status.template.html"
-         sh 'echo "var vtsStatusURI = "http://localhost/status/format/json", vtsUpdateInterval = 1000;" > share/status.template.html'
-         sh "cp share/status.template.html /usr/share/nginx/html/status.html"
-         sh 'echo -e "server { server_name 35.219.189.235;\nroot /usr/share/nginx/html;\n# Redirect requests for / to /status.html\nlocation = / {return 301 /status.html;}\nlocation = /status.html {}\n# Everything beginning /status (except for /status.html) is\n# processed by the status handler\nlocation /status {\nvhost_traffic_status_display;\nvhost_traffic_status_display_format json;\n}}" > nginx.conf'
        }
        
      }

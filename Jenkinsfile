@@ -45,8 +45,8 @@ pipeline {
       
       post {
         failure {
-          emailext body: '''$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
-          subject: '$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS!', 
+          emailext body: '''$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $BUILD_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
+          subject: '$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $BUILD_STATUS!', 
           to: 'darrylnoumen3@gmail.com'
         }
         

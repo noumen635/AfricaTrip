@@ -24,16 +24,6 @@ pipeline {
         
       }
       
-      post {
-       
-        failure {
-          emailext body: '''$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
-          subject: '$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS!', 
-          to: 'darrylnoumen3@gmail.com'
-        }
-        
-      }
-      
     }
     
     stage("Quality Gate") {
@@ -50,15 +40,14 @@ pipeline {
           }
           
         }
-    
-        post {
-       
-          failure {
-            emailext body: '''$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
-            subject: '$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS!', 
-            to: 'darrylnoumen3@gmail.com'
-          }
         
+      }
+      
+      post {
+        failure {
+          emailext body: '''$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
+          subject: '$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS!', 
+          to: 'darrylnoumen3@gmail.com'
         }
         
       }
@@ -73,32 +62,12 @@ pipeline {
         sh "docker build -t noumendarryl/africatrip:latest ."
       }
       
-      post {
-       
-        failure {
-          emailext body: '''$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
-          subject: '$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS!', 
-          to: 'darrylnoumen3@gmail.com'
-        }
-        
-      }
-      
     }
     
     stage("test") {
       
       steps {
         echo 'testing the application...'
-      }
-      
-      post {
-       
-        failure {
-          emailext body: '''$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
-          subject: '$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS!', 
-          to: 'darrylnoumen3@gmail.com'
-        }
-        
       }
       
     }
@@ -112,16 +81,6 @@ pipeline {
         }
         sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
         sh "docker push noumendarryl/africatrip:latest"
-      }
-      
-      post {
-       
-        failure {
-          emailext body: '''$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
-          subject: '$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS!', 
-          to: 'darrylnoumen3@gmail.com'
-        }
-        
       }
       
     }
@@ -144,16 +103,6 @@ pipeline {
          }
 
          sh "docker run -d -p 80:80 --name=africatrip noumendarryl/africatrip:latest"
-       }
-       
-     }
-      
-     post {
-       
-       failure {
-         emailext body: '''$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
-         subject: '$PROJECT_NAME - $JOB_NAME # $BUILD_NUMBER - $JOB_STATUS!', 
-         to: 'darrylnoumen3@gmail.com'
        }
        
      }

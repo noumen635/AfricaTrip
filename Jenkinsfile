@@ -24,36 +24,46 @@ pipeline {
         
       }
       
-    }
-    
-    stage("Quality Gate") {
-      
-      steps{
-        
-        script {
-          timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-            def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
-            if (qg.status != 'OK') {
-              error "Pipeline aborted due to quality gate failure: ${qg.status}"
-            }    
-            
-          }
-          
-        }
-        
-      }
-      
       post {
         
         failure {
-          emailext body: '''$PROJECT_NAME - Quality Gate Stage # $BUILD_NUMBER - $BUILD_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
-          subject: '$PROJECT_NAME - Quality Gate Stage # $BUILD_NUMBER - $BUILD_STATUS!', 
+          emailext body: '''Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.''', 
+          subject: '$PROJECT_NAME - SonarQube analysis # $BUILD_NUMBER - $BUILD_STATUS!', 
           to: 'darrylnoumen3@gmail.com'
         }
         
       }
       
     }
+    
+//     stage("Quality Gate") {
+      
+//       steps{
+        
+//         script {
+//           timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+//             def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+//             if (qg.status != 'OK') {
+//               error "Pipeline aborted due to quality gate failure: ${qg.status}"
+//             }    
+            
+//           }
+          
+//         }
+        
+//       }
+      
+//       post {
+        
+//         failure {
+//           emailext body: '''$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS : Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.''', 
+//           subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS!', 
+//           to: 'darrylnoumen3@gmail.com'
+//         }
+        
+//       }
+      
+//     }
 
     stage("build") {
  
@@ -61,6 +71,16 @@ pipeline {
         echo 'building the application...'
         sh "docker build -t noumendarryl/africatrip:${BUILD_NUMBER} ."
         sh "docker build -t noumendarryl/africatrip:latest ."
+      }
+      
+      post {
+        
+        failure {
+          emailext body: '''Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.''', 
+          subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', 
+          to: 'darrylnoumen3@gmail.com'
+        }
+        
       }
       
     }
@@ -71,6 +91,16 @@ pipeline {
         echo 'testing the application...'
       }
       
+      post {
+        
+        failure {
+          emailext body: '''Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.''', 
+          subject: '$PROJECT_NAME - Test # $BUILD_NUMBER - $BUILD_STATUS!', 
+          to: 'darrylnoumen3@gmail.com'
+        }
+        
+      }
+      
     }
     
     stage("artifact storage") {
@@ -78,10 +108,20 @@ pipeline {
       steps {
         echo 'packaging the application...'
         withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
-          sh "docker login -u noumendarryl -p ${Docker_PWD}"
+          sh "docker login -u noumendarryl -password-stdin ${Docker_PWD}"
         }
         sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
         sh "docker push noumendarryl/africatrip:latest"
+      }
+      
+      post {
+        
+        failure {
+          emailext body: '''Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.''', 
+          subject: '$PROJECT_NAME - Artifactory Storage # $BUILD_NUMBER - $BUILD_STATUS!', 
+          to: 'darrylnoumen3@gmail.com'
+        }
+        
       }
       
     }
@@ -90,30 +130,42 @@ pipeline {
       
      steps {
        
-       script {
-         def container = sh(returnStdout: true, script: "docker ps -q -f name=africatrip")
+//        script {
+//          def container = sh(returnStdout: true, script: "docker ps -q -f name=africatrip")
 
-         if (container) {
-           sh "docker stop africatrip"        
-         }
+//          if (container) {
+//            sh "docker stop africatrip"        
+//          }
          
-         def is_existing = sh (returnStdout: true, script: "docker container ls -a -q -f name=africatrip")
+//          def is_existing = sh (returnStdout: true, script: "docker container ls -a -q -f name=africatrip")
 
-         if (is_existing) {
-           sh "docker rm africatrip"
-         }
+//          if (is_existing) {
+//            sh "docker rm africatrip"
+//          }
 
-         sh "docker run -d -p 80:80 --name=africatrip noumendarryl/africatrip:latest"
-       }
+//          sh "docker run -d -p 80:80 --name=africatrip noumendarryl/africatrip:latest"
+//        }
        
+       sh "npm install python3"
+       sh "docker-compose up -d"
      }
+      
+     post {
+        
+        failure {
+          emailext body: '''Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.''', 
+          subject: '$PROJECT_NAME - Docker Deployment # $BUILD_NUMBER - $BUILD_STATUS!', 
+          to: 'darrylnoumen3@gmail.com'
+        }
+        
+      }
       
     }
     
     stage("Email Notification") {
       
       steps {
-        emailext body: '''$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS : Check console output at $BUILD_URL to view the results. Please note that this is an automated email.''', 
+        emailext body: '''Check console output at $BUILD_URL to view the results. Please note that this is an automated email.''', 
         subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS!', 
         to: 'darrylnoumen3@gmail.com'
       }

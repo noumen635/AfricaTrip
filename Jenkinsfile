@@ -46,7 +46,7 @@ pipeline {
       post {
         
         failure {
-          emailext body: '''$PROJECT_NAME - Quality Gate Stage # $BUILD_NUMBER - $BUILD_STATUS : Check console output at $STAGE_URL to view the results. Please note that this is an automated email.''', 
+          emailext body: '''$PROJECT_NAME - Quality Gate Stage # $BUILD_NUMBER - $BUILD_STATUS : Check console output at $JOB_URL to view the results. Please note that this is an automated email.''', 
           subject: '$PROJECT_NAME - Quality Gate Stage # $BUILD_NUMBER - $BUILD_STATUS!', 
           to: 'darrylnoumen3@gmail.com'
         }

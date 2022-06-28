@@ -108,7 +108,7 @@ pipeline {
       steps {
         echo 'packaging the application...'
         withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
-          sh "docker login -u noumendarryl --password-stdin ${Docker_PWD}"
+          sh "docker login -u noumendarryl -p ${Docker_PWD}"
         }
         sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
         sh "docker push noumendarryl/africatrip:latest"

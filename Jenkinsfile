@@ -163,19 +163,12 @@ pipeline {
     stage("Email Notification") {
       
       steps {
-        
-        script {
-          
-          wrap([$class: 'BuildUser']) {
-            def user = env.BUILD_USER_EMAIL
+        wrap([$class: 'BuildUser']) {
+          echo "${BUILD_USER_EMAIL}"
             
-            echo "${user}"
-            
-            emailext body: 'Check console output at $BUILD_URL to view the results. Please note that this is an automated email.', 
-            recipientProviders: "${user}", 
-            subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS!'
-            
-          }
+          emailext body: 'Check console output at $BUILD_URL to view the results. Please note that this is an automated email.', 
+          recipientProviders: "${BUILD_USER_EMAIL}", 
+          subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS!'
           
         }
         

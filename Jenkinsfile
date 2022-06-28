@@ -14,7 +14,6 @@ pipeline {
         
         script {
           def scannerHome = tool 'SonarQubeScanner-4.7.0';
-          echo "${scannerHome}"
           withSonarQubeEnv('sonarqube-9.5') { 
             // If you have configured more than one global server connection, you can specify its name
             sh "${scannerHome}/bin/sonar-scanner"
@@ -169,6 +168,8 @@ pipeline {
           
           wrap([$class: 'BuildUser']) {
             def user = env.BUILD_USER_EMAIL
+            
+            echo "${user}"
             
             emailext body: 'Check console output at $BUILD_URL to view the results. Please note that this is an automated email.', 
             recipientProviders: "${user}", 

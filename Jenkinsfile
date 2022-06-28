@@ -163,9 +163,13 @@ pipeline {
     stage("Email Notification") {
       
       steps {
-        emailext body: 'Check console output at $BUILD_URL to view the results. Please note that this is an automated email.', 
-        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], 
-        subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS!'
+        
+        wrap([$class: 'BuildUser']) {
+          emailext body: 'Check console output at $BUILD_URL to view the results. Please note that this is an automated email.', 
+          //recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], 
+          subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS!',
+          to: "${BUILD_USER_EMAIL}"
+        }
         
       }
       

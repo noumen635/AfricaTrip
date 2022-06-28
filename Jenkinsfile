@@ -167,7 +167,7 @@ pipeline {
         script {
           
           wrap([$class: 'BuildUser']) {
-            echo "${BUILD_USER_EMAIL}"
+            sh 'echo "${BUILD_USER_EMAIL}"'
 
             emailext body: 'Check console output at $BUILD_URL to view the results. Please note that this is an automated email.', 
             recipientProviders: "${BUILD_USER_EMAIL}", 

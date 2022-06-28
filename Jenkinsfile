@@ -166,7 +166,7 @@ pipeline {
       steps {
         emailext body: 'Check console output at $BUILD_URL to view the results. Please note that this is an automated email.', 
         recipientProviders: [requestor()], 
-        subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS!'
+        subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS!',
         to: 'darrylnoumen3@gmail.com'
       }
       

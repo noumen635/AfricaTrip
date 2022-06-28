@@ -146,7 +146,6 @@ pipeline {
 //          sh "docker run -d -p 80:80 --name=africatrip noumendarryl/africatrip:latest"
 //        }
        
-       sh "npm install python3"
        sh "docker-compose up -d"
      }
       

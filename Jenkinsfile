@@ -35,34 +35,34 @@ pipeline {
       
     }
     
-//     stage("Quality Gate") {
+    stage("Quality Gate") {
       
-//       steps{
+      steps{
         
-//         script {
-//           timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-//             def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
-//             if (qg.status != 'OK') {
-//               error "Pipeline aborted due to quality gate failure: ${qg.status}"
-//             }    
+        script {
+          timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+            def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+            if (qg.status != 'OK') {
+              error "Pipeline aborted due to quality gate failure: ${qg.status}"
+            }    
             
-//           }
+          }
           
-//         }
+        }
         
-//       }
+      }
       
-//       post {
+      post {
         
-//         failure {
-//           emailext body: '''$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS : Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.''', 
-//           subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS!', 
-//           to: 'darrylnoumen3@gmail.com'
-//         }
+        failure {
+          emailext body: '''$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS : Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.''', 
+          subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS!', 
+          to: 'darrylnoumen3@gmail.com'
+        }
         
-//       }
+      }
       
-//     }
+    }
 
     stage("build") {
  

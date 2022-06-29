@@ -149,14 +149,14 @@ pipeline {
         
         //wrap([$class: 'BuildUser']) {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
-            recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+            recipientProviders: [[$class: 'RequesterRecipientProvider']],
             subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS !',
             to: 'darrylnoumen3@gmail.com'
         //}
         
         slackSend channel: '#devops-environment', 
           color: 'good', 
-          message: "${PROJECT_NAME} - Pipeline # ${env.BUILD_NUMBER} - ${BUILD_STATUS} : Check console output at ${env.JOB_NAME}/console to view the results. Please note that this is an automated email.", 
+          message: "$PROJECT_NAME - Pipeline # ${env.BUILD_NUMBER} - $BUILD_STATUS : Check console output at ${env.JOB_NAME}/console to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 

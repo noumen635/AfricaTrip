@@ -168,7 +168,7 @@ pipeline {
           emailext body: 'Check console output at $BUILD_URL to view the results. Please note that this is an automated email.', 
           //recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], 
           subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS!',
-          to: 'noumendarryl@gmail.com darrylnoumen3@gmail.com'
+          to: "${env.BUILD_USER_EMAIL}"
         }
         
       }

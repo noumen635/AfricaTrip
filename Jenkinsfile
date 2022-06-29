@@ -37,36 +37,36 @@ pipeline {
       
     }
     
-    stage("Quality Gate") {
+//     stage("Quality Gate") {
       
-      steps{
+//       steps{
         
-        script {
-          timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-            def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
-            if (qg.status != 'OK') {
-              error "Pipeline aborted due to quality gate failure: ${qg.status}"
-            }    
+//         script {
+//           timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+//             def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+//             if (qg.status != 'OK') {
+//               error "Pipeline aborted due to quality gate failure: ${qg.status}"
+//             }    
             
-          }
+//           }
           
-        }
+//         }
         
-      }
+//       }
       
-      post {
+//       post {
         
-        failure {
-          emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
-            recipientProviders: [requestor()], 
-            replyTo: 'do-not-reply@jenkinsserver.com', 
-            subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS!', 
-            to: 'darrylnoumen3@gmail.com'
-        }
+//         failure {
+//           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
+//             recipientProviders: [requestor()], 
+//             replyTo: 'do-not-reply@jenkinsserver.com', 
+//             subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS!', 
+//             to: 'darrylnoumen3@gmail.com'
+//         }
         
-      }
+//       }
       
-    }
+//     }
 
     stage("build") {
  
@@ -114,16 +114,11 @@ pipeline {
       
       steps {
         echo 'packaging the application...'
-//         withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
-//           sh "docker login -u noumendarryl -p ${Docker_PWD}"
-//         }
-//         sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
-//         sh "docker push noumendarryl/africatrip:latest"
-        sh "docker login jabaspace.jfrog.io"
-        sh "docker tag africatrip:${BUILD_NUMBER} jabaspace.jfrog.io/jabaspace/africatrip:${BUILD_NUMBER}"
-        sh "docker tag africatrip:latest jabaspace.jfrog.io/jabaspace/africatrip:latest"
-        sh "docker push jabaspace.jfrog.io/jabaspace/africatrip:${BUILD_NUMBER}"
-        sh "docker push jabaspace.jfrog.io/jabaspace/africatrip:latest"
+        withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
+          sh "docker login -u noumendarryl -p ${Docker_PWD}"
+        }
+        sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
+        sh "docker push noumendarryl/africatrip:latest"
       }
       
       post {
@@ -169,7 +164,7 @@ pipeline {
             recipientProviders: [requestor()], 
             replyTo: 'do-not-reply@jenkinsserver.com', 
             subject: '$PROJECT_NAME - SonarQube analysis # $BUILD_NUMBER - $BUILD_STATUS!', 
-            to: "darrylnoumen3@gmail.com ${env.BUILD_USER_EMAIL}"
+            to: "darrylnoumen3@gmail.com"
         }
         
       }

@@ -149,8 +149,9 @@ pipeline {
         
         wrap([$class: 'BuildUser']) {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
+          recipientProviders: [[$class: 'DevelopersRecipientProvider']],
           subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS !', 
-          to: "${env.BUILD_USER_EMAIL}"
+          to: "${CAUSE}"
         }
         
       }

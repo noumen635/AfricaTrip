@@ -27,8 +27,7 @@ pipeline {
         
         failure {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
-            recipientProviders: [requestor()], 
-            replyTo: 'do-not-reply@jenkinsserver.com', 
+            recipientProviders: [developers()], 
             subject: '$PROJECT_NAME - SonarQube analysis # $BUILD_NUMBER - $BUILD_STATUS!', 
             to: 'darrylnoumen3@gmail.com'
         }
@@ -58,8 +57,7 @@ pipeline {
         
 //         failure {
 //           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
-//             recipientProviders: [requestor()], 
-//             replyTo: 'do-not-reply@jenkinsserver.com', 
+//             recipientProviders: [developers()], 
 //             subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS!', 
 //             to: 'darrylnoumen3@gmail.com'
 //         }
@@ -80,8 +78,7 @@ pipeline {
         
         failure {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
-            recipientProviders: [requestor()], 
-            replyTo: 'do-not-reply@jenkinsserver.com', 
+            recipientProviders: [developers()], 
             subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', 
             to: 'darrylnoumen3@gmail.com'
         }
@@ -100,8 +97,7 @@ pipeline {
         
         failure {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
-            recipientProviders: [requestor()], 
-            replyTo: 'do-not-reply@jenkinsserver.com', 
+            recipientProviders: [developers()], 
             subject: '$PROJECT_NAME - Test # $BUILD_NUMBER - $BUILD_STATUS!', 
             to: 'darrylnoumen3@gmail.com'
         }
@@ -125,8 +121,7 @@ pipeline {
         
         failure {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
-            recipientProviders: [requestor()], 
-            replyTo: 'do-not-reply@jenkinsserver.com', 
+            recipientProviders: [developers()], 
             subject: '$PROJECT_NAME - Artifactory Storage # $BUILD_NUMBER - $BUILD_STATUS!', 
             to: 'darrylnoumen3@gmail.com'
         }
@@ -145,8 +140,7 @@ pipeline {
         
         failure {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
-            recipientProviders: [requestor()], 
-            replyTo: 'do-not-reply@jenkinsserver.com', 
+            recipientProviders: [developers()], 
             subject: '$PROJECT_NAME - Docker Deployment # $BUILD_NUMBER - $BUILD_STATUS!', 
             to: 'darrylnoumen3@gmail.com'
         }
@@ -159,8 +153,7 @@ pipeline {
       
       steps {
         emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
-          recipientProviders: [requestor()], 
-          replyTo: 'do-not-reply@jenkinsserver.com', 
+          recipientProviders: [developers()],  
           subject: '$PROJECT_NAME - SonarQube analysis # $BUILD_NUMBER - $BUILD_STATUS!', 
           to: 'darrylnoumen3@gmail.com'
         

@@ -154,13 +154,13 @@ pipeline {
             to: 'darrylnoumen3@gmail.com'
         //}
         
-        slackSend channel: 'devops-environment', 
+        slackSend channel: '#devops-environment', 
           color: 'good', 
           message: '${env.PROJECT_NAME} - Pipeline # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS} : Check console output at ${env.JOB_NAME}/console to view the results. Please note that this is an automated email.', 
           notifyCommitters: true, 
-          teamDomain: 'AfricaTrip', 
+          teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 
-          username: 'noumendarryl@gmail.com'
+          username: 'jenkins'
         
       }
       

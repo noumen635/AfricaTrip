@@ -106,11 +106,16 @@ pipeline {
       
       steps {
         echo 'packaging the application...'
-        withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
-          sh "docker login -u noumendarryl -p ${Docker_PWD}"
-        }
-        sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
-        sh "docker push noumendarryl/africatrip:latest"
+//         withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
+//           sh "docker login -u noumendarryl -p ${Docker_PWD}"
+//         }
+//         sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
+//         sh "docker push noumendarryl/africatrip:latest"
+        sh "docker login jabaspace.jfrog.io"
+        sh "docker tag africatrip:${BUILD_NUMBER} jabaspace.jfrog.io/jabaspace/africatrip:${BUILD_NUMBER}"
+        sh "docker tag africatrip:latest jabaspace.jfrog.io/jabaspace/africatrip:latest"
+        sh "docker push jabaspace.jfrog.io/jabaspace/africatrip:${BUILD_NUMBER}"
+        sh "docker push jabaspace.jfrog.io/jabaspace/africatrip:latest"
       }
       
       post {
@@ -128,23 +133,6 @@ pipeline {
     stage("deploy on Docker") {
       
      steps {
-       
-//        script {
-//          def container = sh(returnStdout: true, script: "docker ps -q -f name=africatrip")
-
-//          if (container) {
-//            sh "docker stop africatrip"        
-//          }
-         
-//          def is_existing = sh (returnStdout: true, script: "docker container ls -a -q -f name=africatrip")
-
-//          if (is_existing) {
-//            sh "docker rm africatrip"
-//          }
-
-//          sh "docker run -d -p 80:80 --name=africatrip noumendarryl/africatrip:latest"
-//        }
-       
        sh "docker-compose up -d"
      }
       

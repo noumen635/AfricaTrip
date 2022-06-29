@@ -146,11 +146,7 @@ pipeline {
     stage("Email Notification") {
       
       steps {
-        mail bcc: '', 
-          body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
-          cc: '', 
-          from: 'jenkins-server@gmail.com', 
-          replyTo: '', 
+        emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
           subject: '$PROJECT_NAME - Pipeline # $BUILD_NUMBER - $BUILD_STATUS!', 
           to: 'darrylnoumen3@gmail.com'
       }

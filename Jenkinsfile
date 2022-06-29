@@ -156,7 +156,7 @@ pipeline {
         
         slackSend channel: '#devops-environment', 
           color: 'good', 
-          message: "$PROJECT_NAME - Pipeline # ${env.BUILD_NUMBER} - $BUILD_STATUS : Check console output at ${env.JOB_NAME}/console to view the results. Please note that this is an automated email.", 
+          message: "my-multibranch-pipeline » master - Pipeline # ${env.BUILD_NUMBER} - $BUILD_STATUS : Check console output at ${env.JOB_NAME}/console to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 

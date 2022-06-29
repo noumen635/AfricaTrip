@@ -159,13 +159,13 @@ pipeline {
       
       steps {
         
-        wrap([$class: 'BuildUser']) {
+//         wrap([$class: 'BuildUser']) {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
             recipientProviders: [requestor()], 
             replyTo: 'do-not-reply@jenkinsserver.com', 
             subject: '$PROJECT_NAME - SonarQube analysis # $BUILD_NUMBER - $BUILD_STATUS!', 
             to: "darrylnoumen3@gmail.com"
-        }
+//         }
         
       }
       

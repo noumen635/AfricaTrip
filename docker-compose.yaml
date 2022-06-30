@@ -1,6 +1,6 @@
 version: '3.3'
 services:
   africatrip:
-    image: noumendarryl/africatrip
+    image: africatrip
     ports:
       - 80:80

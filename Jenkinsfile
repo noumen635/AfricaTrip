@@ -68,8 +68,8 @@ pipeline {
  
       steps {
         echo 'building the application...'
-        sh "docker build -t noumendarryl/africatrip:${BUILD_NUMBER} ."
-        sh "docker build -t noumendarryl/africatrip:latest ."
+        sh "docker build -t africatrip:${BUILD_NUMBER} ."
+        sh "docker build -t africatrip:latest ."
       }
       
       post {
@@ -109,8 +109,8 @@ pipeline {
         withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
           sh "docker login -u noumendarryl -p ${Docker_PWD}"
         }
-        sh "docker push noumendarryl/africatrip:${BUILD_NUMBER}"
-        sh "docker push noumendarryl/africatrip:latest"
+        sh "docker push africatrip:${BUILD_NUMBER}"
+        sh "docker push africatrip:latest"
       }
       
       post {

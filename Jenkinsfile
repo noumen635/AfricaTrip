@@ -116,7 +116,7 @@ pipeline {
         // sh "docker push noumendarryl/africatrip:v1.${BUILD_NUMBER}"
         // sh "docker push noumendarryl/africatrip:latest"
         withCredentials([usernamePassword(credentialsId: 'JfrogID', passwordVariable: 'JfrogPWD', usernameVariable: 'JfrogID')]) {
-            sh "docker login jabaspace.jfrog.io"
+            sh "docker login -u JfrogID -p JfrogPWD jabaspace.jfrog.io"
         }
         sh "docker tag noumendarryl/africatrip:v1.${BUILD_NUMBER} jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
         sh "docker tag noumendarryl/africatrip:latest jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"

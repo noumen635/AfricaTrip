@@ -140,10 +140,14 @@ pipeline {
       
     }
       
-    stage("Deploy on Docker") {
+    stage("Deploy on kubernetes") {
       
      steps {
-       sh "docker-compose up -d"
+      //  sh "docker-compose up -d"
+      script {
+        kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+      }
+
      }
       
      post {

@@ -93,7 +93,7 @@ pipeline {
         echo 'testing the application...'
         sh "/usr/bin/jmeter/apache-jmeter-5.5/bin/jmeter -n -t AfricaTrip.jmx -l AfricaTripResults.jtl"
         sh "cat AfricaTripResults.jtl"
-        perfReport "AfricaTripResults.jtl"
+        perfReport "AfricaTripResults.jtl"  
       }
       
       post {

@@ -66,7 +66,7 @@ pipeline {
       
 //     }
 
-    stage("build") {
+    stage("Build") {
  
       steps {
         echo 'building the application...'
@@ -87,10 +87,14 @@ pipeline {
       
     }
     
-    stage("test") {
+    stage("Tests") {
       
       steps {
         echo 'testing the application...'
+        sh "cd /usr/bin/jmeter/apache-jmeter-5.5/bin/"
+        sh "./jmeter -n -t AfricaTrip.jmx -l AfricaTripResults.jtl"
+        sh "cat AfricaTripResults.jtl"
+        perfReport "AfricaTripResults.jtl"
       }
       
       post {
@@ -106,10 +110,10 @@ pipeline {
       
     }
     
-    stage("artifact storage") {
+    stage("Artifact Storage") {
       
       steps {
-        echo 'packaging the application...'
+        echo 'Packaging and storing dependencies of the application...'
         // withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
         //   sh "docker login -u noumendarryl -p ${Docker_PWD}"
         // }
@@ -137,7 +141,7 @@ pipeline {
       
     }
       
-    stage("deploy on Docker") {
+    stage("Deploy on Docker") {
       
      steps {
        sh "docker-compose up -d"

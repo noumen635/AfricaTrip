@@ -110,11 +110,16 @@ pipeline {
       
       steps {
         echo 'packaging the application...'
-        withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
-          sh "docker login -u noumendarryl -p ${Docker_PWD}"
-        }
-        sh "docker push noumendarryl/africatrip:v1.${BUILD_NUMBER}"
-        sh "docker push noumendarryl/africatrip:latest"
+        // withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
+        //   sh "docker login -u noumendarryl -p ${Docker_PWD}"
+        // }
+        // sh "docker push noumendarryl/africatrip:v1.${BUILD_NUMBER}"
+        // sh "docker push noumendarryl/africatrip:latest"
+        sh "docker login jabaspace.jfrog.io"
+        sh "docker tag noumendarryl/africatrip:v1.${BUILD_NUMBER} jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
+        sh "docker tag noumendarryl/africatrip:latest jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
+        sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
+        sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
       }
       
       post {

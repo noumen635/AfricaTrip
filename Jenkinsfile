@@ -91,8 +91,7 @@ pipeline {
       
       steps {
         echo 'testing the application...'
-        sh "cd /usr/bin/jmeter/apache-jmeter-5.5/bin/"
-        sh "./jmeter -n -t AfricaTrip.jmx -l AfricaTripResults.jtl"
+        sh "/usr/bin/jmeter/apache-jmeter-5.5/bin/jmeter -n -t AfricaTrip.jmx -l AfricaTripResults.jtl"
         sh "cat AfricaTripResults.jtl"
         perfReport "AfricaTripResults.jtl"
       }

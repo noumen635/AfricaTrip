@@ -5,18 +5,18 @@ metadata:
    labels:
      app: africatrip
 spec:
+   replicas: 1
    selector:
      matchLabels:
          app: africatrip
-   replicas: 1
    template:
      metadata:
          labels:
             app: africatrip
      spec:
          containers:
-         -  image: noumendarryl/africatrip:latest
-            name: africatrip
+         - name: africatrip
+            image: noumendarryl/africatrip:latest
             ports:
             -  containerPort: 80
 
@@ -36,4 +36,4 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 80
-    nodePort: 30050
+    nodePort: 30000

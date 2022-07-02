@@ -143,9 +143,14 @@ pipeline {
     stage("Deploy on kubernetes") {
       
      steps {
+
       //  sh "docker-compose up -d"
       script {
-        kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+        // kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+        sh "kubectl apply -f deploymentservice.yml" 
+        sh "kubectl get pods"
+        sh "kubectl get svc"
+        sh "minikube service africatrip"
       }
 
      }
@@ -155,7 +160,7 @@ pipeline {
         failure {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
             recipientProviders: [[$class: 'RequesterRecipientProvider']],
-            subject: '$PROJECT_NAME - Docker Deployment # $BUILD_NUMBER - $BUILD_STATUS !', 
+            subject: '$PROJECT_NAME - Kubernetes Deployment # $BUILD_NUMBER - $BUILD_STATUS !', 
             to: 'darrylnoumen3@gmail.com'
         }
         

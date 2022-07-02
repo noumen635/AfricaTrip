@@ -16,7 +16,7 @@ spec:
      spec:
          containers:
          - name: africatrip
-            image: noumendarryl/africatrip:latest
+            image: "noumendarryl/africatrip:latest"
             ports:
             -  containerPort: 80
 

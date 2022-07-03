@@ -9,9 +9,9 @@ spec:
     app: africatrip
   type: LoadBalancer
   ports:
-  - port: 80
-    targetPort: 80
-    nodePort: 30050
+    - port: 80
+      targetPort: 80
+      nodePort: 30050
 
 ---
 
@@ -32,7 +32,7 @@ spec:
           app: africatrip
      spec:
         containers:
-        - name: africatrip
-          image: noumendarryl/africatrip:latest
-          ports:
-          - containerPort: 80
+          - name: africatrip
+            image: noumendarryl/africatrip:latest
+            ports:
+              - containerPort: 80

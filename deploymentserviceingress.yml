@@ -2,16 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: africatrip-service
-  labels:
-    app: africatrip
 spec:
   selector:
     app: africatrip
   type: LoadBalancer
   ports:
-  - port: 80
+  - protocol: TCP
+    port: 80
     targetPort: 80
-    nodePort: 30050
+    nodePort: 31110
 
 ---
 
@@ -32,7 +31,7 @@ spec:
           app: africatrip
      spec:
       containers:
-        - name: africatrip
+        - name: noumendarryl/africatrip
           image: noumendarryl/africatrip:latest
           ports:
           - containerPort: 80

@@ -35,3 +35,24 @@ spec:
           image: noumendarryl/africatrip:latest
           ports:
           - containerPort: 80
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: africatrip-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: www.africatrip.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: africatrip-service
+                port:
+                  number: 80

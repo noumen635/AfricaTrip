@@ -162,7 +162,7 @@ pipeline {
         sh "kubectl get pods"
         sh "kubectl get deployments"
         sh "kubectl get svc"
-        sh "kubectl get ingress"
+        // sh "kubectl get ingress"
         sh "minikube service africatrip-service"
       }
 

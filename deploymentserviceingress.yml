@@ -31,7 +31,7 @@ spec:
         app: africatrip
     spec:
       containers:
-        - name: noumendarryl/africatrip
+        - name: my-website
           image: noumendarryl/africatrip:latest
           ports:
           - containerPort: 80

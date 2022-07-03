@@ -11,7 +11,9 @@ pipeline {
     stage('SonarQube analysis') {
       
       steps {
-        
+
+        echo 'Analyzing my source code'
+
         script {
           def scannerHome = tool 'SonarQubeScanner-4.7.0';
           withSonarQubeEnv('sonarqube-9.5') { 
@@ -69,9 +71,11 @@ pipeline {
     stage("Build") {
  
       steps {
-        echo 'building the application...'
+
+        echo 'Building the application'
         sh "docker build -t noumendarryl/africatrip:v1.${BUILD_NUMBER} ."
         sh "docker build -t noumendarryl/africatrip:latest ."
+
       }
       
       post {
@@ -90,10 +94,12 @@ pipeline {
     stage("Tests") {
       
       steps {
-        echo 'testing the application...'
+
+        echo 'Testing the application'
         sh "/usr/bin/jmeter/apache-jmeter-5.5/bin/jmeter -n -t AfricaTrip.jmx -l AfricaTripResults.jtl"
-        sh "cat AfricaTripResults.jtl"
+        // sh "cat AfricaTripResults.jtl"
         perfReport "AfricaTripResults.jtl"  
+
       }
       
       post {
@@ -112,7 +118,8 @@ pipeline {
     stage("Artifact Storage") {
       
       steps {
-        echo 'Packaging and storing dependencies of the application...'
+
+        echo 'Packaging and storing dependencies of the application'
         // withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
         //   sh "docker login -u noumendarryl -p ${Docker_PWD}"
         // }
@@ -125,6 +132,7 @@ pipeline {
         sh "docker tag noumendarryl/africatrip:latest jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
         sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
         sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
+        
       }
       
       post {
@@ -144,13 +152,14 @@ pipeline {
       
      steps {
 
+      echo 'Deploying my application on k8s'
       //  sh "docker-compose up -d"
       script {
-        kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
-        // sh "kubectl apply -f deploymentservice.yml" 
-        // sh "kubectl get pods"
-        // sh "kubectl get svc"
-        // sh "minikube service africatrip"
+        // kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+        sh "kubectl apply -f deploymentservice.yml" 
+        sh "kubectl get pods"
+        sh "kubectl get svc"
+        sh "minikube service africatrip"
       }
 
      }

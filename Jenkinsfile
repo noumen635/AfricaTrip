@@ -158,10 +158,12 @@ pipeline {
       //  sh "docker-compose up -d"
       script {
         // kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
-        sh "kubectl apply -f deploymentservice.yml" 
+        sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "kubectl get pods"
+        sh "kubectl get deployments"
         sh "kubectl get svc"
-        sh "minikube service africatrip"
+        sh "kubectl get ingress"
+        sh "minikube service africatrip-service"
       }
 
      }

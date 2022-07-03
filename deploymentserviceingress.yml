@@ -25,11 +25,11 @@ spec:
   selector:
     matchLabels:
       app: africatrip
-    template:
-     metadata:
-        labels:
-          app: africatrip
-     spec:
+  template:
+    metadata:
+      labels:
+        app: africatrip
+    spec:
       containers:
         - name: noumendarryl/africatrip
           image: noumendarryl/africatrip:latest

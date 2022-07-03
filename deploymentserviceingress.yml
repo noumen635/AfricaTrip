@@ -43,7 +43,7 @@ kind: Ingress
 metadata:
   name: africatrip-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /index.html
 spec:
   rules:
     - host: www.africatrip.com

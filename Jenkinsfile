@@ -74,7 +74,7 @@ pipeline {
  
       steps {
 
-        echo 'Building the application'
+        echo 'Building my application'
         sh "docker build -t noumendarryl/africatrip:v1.${BUILD_NUMBER} ."
         sh "docker build -t noumendarryl/africatrip:latest ."
 
@@ -97,7 +97,7 @@ pipeline {
       
       steps {
 
-        echo 'Testing the application'
+        echo 'Testing my application'
         sh "/usr/bin/jmeter/apache-jmeter-5.5/bin/jmeter -n -t AfricaTrip.jmx -l AfricaTripResults.jtl"
         // sh "cat AfricaTripResults.jtl"
         perfReport "AfricaTripResults.jtl"  
@@ -121,7 +121,7 @@ pipeline {
       
       steps {
 
-        echo 'Packaging and storing dependencies of the application'
+        echo 'Packaging and storing dependencies of my application'
         // withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
         //   sh "docker login -u noumendarryl -p ${Docker_PWD}"
         // }

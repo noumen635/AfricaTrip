@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: africatrip-service
+  labels:
+    app: africatrip
+spec:
+  selector:
+    app: africatrip
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: africatrip-deployment
+  labels:
+    app: africatrip
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: africatrip
+   template:
+     metadata:
+        labels:
+          app: africatrip
+     spec:
+        containers:
+        - name: africatrip
+          image: noumendarryl/africatrip:latest
+          ports:
+          - containerPort: 80
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: africatrip-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: www.africatrip.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: africatrip-service
+                port:
+                  number: 80

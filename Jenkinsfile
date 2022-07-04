@@ -164,8 +164,8 @@ pipeline {
         sh "kubectl get deployments"
         sh "kubectl get svc"
         sh "kubectl get ingress"
-        sh "minikube tunnel"
-        sh "kubectl get svc"
+        // sh "minikube tunnel"
+        // sh "kubectl get svc"
         // sh "minikube service africatrip-service"
       }
 

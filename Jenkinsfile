@@ -157,8 +157,8 @@ pipeline {
       echo 'Deploying my application on k8s'
       //  sh "docker-compose up -d"
       script {
-        sh "sudo minikube start"
-        sh "minikube status"
+        // sh "minikube start"
+        // sh "minikube status"
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "kubectl get pods"
         sh "kubectl get deployments"

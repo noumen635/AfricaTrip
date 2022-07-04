@@ -49,7 +49,7 @@ spec:
     - host: www.africatrip.com
       http:
         paths:
-          - path: /index.html
+          - path: /
             pathType: Prefix
             backend:
               service:

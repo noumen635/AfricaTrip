@@ -1,11 +1,11 @@
-*{
+* {
 	padding: 0;
 	margin: 0;
   box-sizing: border-box;
   font-weight: 300;
 }
 
-header{
+header {
   background-image: url(../img/back2.jpg);
   height: 100vh;
   background-repeat: no-repeat;
@@ -16,7 +16,7 @@ header{
   animation-iteration-count: infinite;
 }
 
-@keyframes image{
+@keyframes image {
   0%{
     background-image: url(../img/back2.jpg);
   }
@@ -25,7 +25,7 @@ header{
   }
 }
 
-.logo{
+.logo {
   float: left;
   padding: 10px 30px;
 }
@@ -37,7 +37,7 @@ header{
   margin-right: 20px;
 }
 
-.logo a i {
+.logo a em {
   font-size: 4.5rem;
   color: #222831;
 }
@@ -173,7 +173,7 @@ font-size: 1.2rem;
   text-align: center;
 }
 
-.icons i {
+.icons em {
   font-size: 3.5rem;
   cursor: pointer;
   padding-left: 2%;

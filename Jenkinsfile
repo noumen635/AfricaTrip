@@ -40,21 +40,14 @@ pipeline {
     
     stage("Quality Gate") {
       
-      steps{
-        
-        script {
-          // Just in case something goes wrong, pipeline will be killed after a timeout
-          timeout(time: 1, unit: 'HOURS') { 
-            // Reuse taskId previously collected by withSonarQubeEnv
-            def qg = waitForQualityGate(); 
-            if (qg.status != 'OK') {
-              error "Pipeline aborted due to quality gate failure: ${qg.status}"
-            }    
-            
-          }
-          
+      steps {
+
+        timeout(time: 1, unit: 'HOURS') {
+          // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+          // true = set pipeline to UNSTABLE, false = don't
+          waitForQualityGate abortPipeline: true
         }
-        
+
       }
       
       post {

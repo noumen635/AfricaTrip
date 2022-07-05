@@ -3,7 +3,9 @@ pipeline {
   agent any
   
   tools {
+
     nodejs 'NodeJS-14.19.3'
+
   }
   
   stages {
@@ -12,9 +14,10 @@ pipeline {
       
       steps {
 
-        echo 'Analyzing my source code'
+        echo "Analyzing my source code"
 
         script {
+
           def scannerHome = tool 'SonarQubeScanner-4.7.0';
           withSonarQubeEnv('sonarqube-9.5') { 
             // If you have configured more than one global server connection, you can specify its name
@@ -38,36 +41,43 @@ pipeline {
       
     }
     
-    // stage("Quality Gate") {
+    stage("Quality Gate") {
       
-    //   steps {
+      steps {
 
-    //     timeout(time: 1, unit: 'HOURS') {
-    //       // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-    //       // true = set pipeline to UNSTABLE, false = don't
-    //       waitForQualityGate abortPipeline: true
-    //     }
+        echo "Applying quality gates to my project"
 
-    //   }
+        script {
+
+          // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+          // true = set pipeline to UNSTABLE, false = don't
+          timeout(time: 1, unit: 'HOURS') {
+            waitForQualityGate abortPipeline: true
+          }
+
+        }
+
+      }
       
-    //   post {
+      post {
         
-    //     failure {
-    //       emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
-    //         recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
-    //         subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS !', 
-    //         to: 'darrylnoumen3@gmail.com'
-    //     }
+        failure {
+          emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+            recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
+            subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS !', 
+            to: 'darrylnoumen3@gmail.com'
+        }
         
-    //   }
+      }
       
-    // }
+    }
 
     stage("Build") {
  
       steps {
 
-        echo 'Building my application'
+        echo "Building my application"
+        
         sh "docker build -t noumendarryl/africatrip:v1.${BUILD_NUMBER} ."
         sh "docker build -t noumendarryl/africatrip:latest ."
 
@@ -90,9 +100,9 @@ pipeline {
       
       steps {
 
-        echo 'Testing my application'
+        echo "Testing my application"
+
         sh "/usr/bin/jmeter/apache-jmeter-5.5/bin/jmeter -n -t AfricaTrip.jmx -l AfricaTripResults.jtl"
-        // sh "cat AfricaTripResults.jtl"
         perfReport "AfricaTripResults.jtl"  
 
       }
@@ -114,18 +124,14 @@ pipeline {
       
       steps {
 
-        echo 'Packaging and storing dependencies of my application'
-        // withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
-        //   sh "docker login -u noumendarryl -p ${Docker_PWD}"
-        // }
-        // sh "docker push noumendarryl/africatrip:v1.${BUILD_NUMBER}"
-        // sh "docker push noumendarryl/africatrip:latest"
+        echo "Packaging and storing dependencies of my application"
+
         withCredentials([usernamePassword(credentialsId: 'JfrogID', passwordVariable: 'JfrogPWD', usernameVariable: 'JfrogID')]) {
             sh "docker login -u ${JfrogID} -p ${JfrogPWD} jabaspace.jfrog.io"
         }
         sh "docker tag noumendarryl/africatrip:v1.${BUILD_NUMBER} jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
-        sh "docker tag noumendarryl/africatrip:latest jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
         sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
+        sh "docker tag noumendarryl/africatrip:latest jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
         sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
         
       }
@@ -147,15 +153,17 @@ pipeline {
       
      steps {
 
-      echo 'Deploying my application on k8s'
+      echo "Deploying my application on k8s"
       //  sh "docker-compose up -d"
       script {
+
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "kubectl get pods"
         sh "kubectl get deployments"
         sh "kubectl get svc"
         sh "kubectl get ingress"
-        sh "minikube service africatrip-service"
+        // sh "minikube service africatrip-service"
+
       }
 
      }
@@ -184,7 +192,7 @@ pipeline {
         
         slackSend channel: '#devops-environment', 
           color: 'good', 
-          message: "my-multibranch-pipeline » master - Pipeline # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS} : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          message: "my-multibranch-pipeline » master - Pipeline # ${env.BUILD_NUMBER} - Successful : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 

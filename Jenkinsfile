@@ -49,11 +49,7 @@ pipeline {
 
         script {
 
-          // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-          // true = set pipeline to UNSTABLE, false = don't
-          timeout(time: 1, unit: 'HOURS') {
-            waitForQualityGate abortPipeline: true
-          }
+          waitForQualityGate(webhookSecretId: 'sonarqube-secret')
 
         }
 
@@ -77,7 +73,7 @@ pipeline {
       steps {
 
         echo "Building my application"
-        
+
         sh "docker build -t noumendarryl/africatrip:v1.${BUILD_NUMBER} ."
         sh "docker build -t noumendarryl/africatrip:latest ."
 

@@ -46,7 +46,12 @@ pipeline {
       steps {
 
         echo "Applying quality gates to my project"
-        waitForQualityGate(webhookSecretId: 'sonarqube-secret')
+
+        script {
+
+          waitForQualityGate(webhookSecretId: 'sonarqube-secret')
+          
+        }
 
       }
       

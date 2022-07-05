@@ -38,30 +38,30 @@ pipeline {
       
     }
     
-    stage("Quality Gate") {
+    // stage("Quality Gate") {
       
-      steps {
+    //   steps {
 
-        timeout(time: 1, unit: 'HOURS') {
-          // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-          // true = set pipeline to UNSTABLE, false = don't
-          waitForQualityGate abortPipeline: false
-        }
+    //     timeout(time: 1, unit: 'HOURS') {
+    //       // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+    //       // true = set pipeline to UNSTABLE, false = don't
+    //       waitForQualityGate abortPipeline: true
+    //     }
 
-      }
+    //   }
       
-      post {
+    //   post {
         
-        failure {
-          emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
-            recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
-            subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS !', 
-            to: 'darrylnoumen3@gmail.com'
-        }
+    //     failure {
+    //       emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+    //         recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
+    //         subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS !', 
+    //         to: 'darrylnoumen3@gmail.com'
+    //     }
         
-      }
+    //   }
       
-    }
+    // }
 
     stage("Build") {
  

@@ -48,7 +48,7 @@ pipeline {
         echo "Applying quality gates to my project"
 
         timeout(time: 1, unit: 'HOURS') {
-          waitForQualityGate abortPipeline: true
+          waitForQualityGate abortPipeline: true, credentialsId: 'sonarqube-secret'
         }
 
       }

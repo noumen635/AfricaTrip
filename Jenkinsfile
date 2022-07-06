@@ -10,7 +10,7 @@ pipeline {
   
   stages {
     
-    stage('SonarQube analysis') {
+    stage ('SonarQube analysis') {
       
       steps {
 
@@ -33,15 +33,23 @@ pipeline {
         failure {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
             recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
-            subject: '$PROJECT_NAME - SonarQube analysis # $BUILD_NUMBER - $BUILD_STATUS !', 
+            subject: '$PROJECT_NAME - SonarQube Analysis # $BUILD_NUMBER - $BUILD_STATUS !', 
             to: 'darrylnoumen3@gmail.com'
+
+          slackSend channel: '#devops-environment', 
+          color: 'danger', 
+          message: "my-multibranch-pipeline » master - SonarQube Analysis # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          notifyCommitters: true, 
+          teamDomain: 'africatripworkspace', 
+          tokenCredentialId: 'Slack', 
+          username: 'jenkins'
         }
         
       }
       
     }
     
-    stage("Quality Gate") {
+    stage ("Quality Gate") {
       
       steps {
 
@@ -60,17 +68,91 @@ pipeline {
             recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
             subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS !', 
             to: 'darrylnoumen3@gmail.com'
+
+          slackSend channel: '#devops-environment', 
+          color: 'danger', 
+          message: "my-multibranch-pipeline » master - Quality Gate # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          notifyCommitters: true, 
+          teamDomain: 'africatripworkspace', 
+          tokenCredentialId: 'Slack', 
+          username: 'jenkins'
         }
         
       }
       
     }
 
-    stage("Build") {
+    stage ("Unit and Integration Tests") {
+
+      parallel {
+
+        stage ("Unit Testing") {
+
+          steps {
+
+            echo "Testing my website unit functions"
+
+          }
+          
+          post {
+            
+            failure {
+              emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+                recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
+                subject: '$PROJECT_NAME - Unit Testing # $BUILD_NUMBER - $BUILD_STATUS !', 
+                to: 'darrylnoumen3@gmail.com'
+
+              slackSend channel: '#devops-environment', 
+              color: 'danger', 
+              message: "my-multibranch-pipeline » master - Unit Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+              notifyCommitters: true, 
+              teamDomain: 'africatripworkspace', 
+              tokenCredentialId: 'Slack', 
+              username: 'jenkins'
+            }
+            
+          }
+
+        }
+
+        stage ("Integration Testing") {
+
+          steps {
+
+            echo "Testing all my website features combined"  
+
+          }
+          
+          post {
+            
+            failure {
+              emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+                recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
+                subject: '$PROJECT_NAME - Integration Testing # $BUILD_NUMBER - $BUILD_STATUS !', 
+                to: 'darrylnoumen3@gmail.com'
+
+              slackSend channel: '#devops-environment', 
+              color: 'danger', 
+              message: "my-multibranch-pipeline » master - Integration Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+              notifyCommitters: true, 
+              teamDomain: 'africatripworkspace', 
+              tokenCredentialId: 'Slack', 
+              username: 'jenkins'
+            }
+            
+          }
+
+        }
+
+      }
+      
+    }
+
+    stage ("Build") {
  
       steps {
 
-        echo "Building my application"
+        echo "Building my website"
 
         sh "docker build -t noumendarryl/africatrip:v1.${BUILD_NUMBER} ."
         sh "docker build -t noumendarryl/africatrip:latest ."
@@ -82,47 +164,32 @@ pipeline {
         failure {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
             recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
-            subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS !', 
+            subject: '$PROJECT_NAME - Build Stage # $BUILD_NUMBER - $BUILD_STATUS !', 
             to: 'darrylnoumen3@gmail.com'
+
+          slackSend channel: '#devops-environment', 
+          color: 'danger', 
+          message: "my-multibranch-pipeline » master - Build Stage # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          notifyCommitters: true, 
+          teamDomain: 'africatripworkspace', 
+          tokenCredentialId: 'Slack', 
+          username: 'jenkins'
         }
         
       }
       
     }
     
-    stage("Tests") {
+    stage ("Artifact Storage") {
       
       steps {
 
-        echo "Testing my application"
-
-        sh "/usr/bin/jmeter/apache-jmeter-5.5/bin/jmeter -n -t AfricaTrip.jmx -l AfricaTripResults.jtl"
-        perfReport "AfricaTripResults.jtl"  
-
-      }
-      
-      post {
-        
-        failure {
-          emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
-            recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
-            subject: '$PROJECT_NAME - Test # $BUILD_NUMBER - $BUILD_STATUS !', 
-            to: 'darrylnoumen3@gmail.com'
-        }
-        
-      }
-      
-    }
-    
-    stage("Artifact Storage") {
-      
-      steps {
-
-        echo "Packaging and storing dependencies of my application"
+        echo "Packaging and storing the dependencies of my website"
 
         withCredentials([usernamePassword(credentialsId: 'JfrogID', passwordVariable: 'JfrogPWD', usernameVariable: 'JfrogID')]) {
-            sh "docker login -u ${JfrogID} -p ${JfrogPWD} jabaspace.jfrog.io"
+          sh "docker login -u ${JfrogID} -p ${JfrogPWD} jabaspace.jfrog.io"
         }
+
         sh "docker tag noumendarryl/africatrip:v1.${BUILD_NUMBER} jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
         sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
         sh "docker tag noumendarryl/africatrip:latest jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
@@ -137,23 +204,31 @@ pipeline {
             recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
             subject: '$PROJECT_NAME - Artifactory Storage # $BUILD_NUMBER - $BUILD_STATUS !', 
             to: 'darrylnoumen3@gmail.com'
+
+          slackSend channel: '#devops-environment', 
+          color: 'danger', 
+          message: "my-multibranch-pipeline » master - Artifactory Storage # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          notifyCommitters: true, 
+          teamDomain: 'africatripworkspace', 
+          tokenCredentialId: 'Slack', 
+          username: 'jenkins'
         }
         
       }
       
     }
       
-    stage("Deploy on kubernetes") {
+    stage ("Deploy on kubernetes") {
       
      steps {
 
-      echo "Deploying my application on k8s"
+      echo "Deploying my website on k8s"
       //  sh "docker-compose up -d"
       script {
 
         sh "minikube kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
-        sh "minikube service africatrip-service"
+        sh "minikube service --url africatrip-service"
 
       }
 
@@ -166,13 +241,118 @@ pipeline {
             recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
             subject: '$PROJECT_NAME - Kubernetes Deployment # $BUILD_NUMBER - $BUILD_STATUS !', 
             to: 'darrylnoumen3@gmail.com'
+
+          slackSend channel: '#devops-environment', 
+          color: 'danger', 
+          message: "my-multibranch-pipeline » master - Kubernetes Deployment # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          notifyCommitters: true, 
+          teamDomain: 'africatripworkspace', 
+          tokenCredentialId: 'Slack', 
+          username: 'jenkins'
+        }
+        
+      }
+      
+    }
+
+    stage ("Performance and UI Tests") {
+
+      parallel {
+
+        stage ("Performance Testing") {
+
+          steps {
+
+            echo "Testing the performance my website"
+            sh "/usr/bin/jmeter/apache-jmeter-5.5/bin/jmeter -n -t AfricaTrip.jmx -l AfricaTripResults.jtl"
+            perfReport "AfricaTripResults.jtl"  
+
+          }
+          
+          post {
+            
+            failure {
+              emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+                recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
+                subject: '$PROJECT_NAME - Performance Testing # $BUILD_NUMBER - $BUILD_STATUS !', 
+                to: 'darrylnoumen3@gmail.com'
+
+              slackSend channel: '#devops-environment', 
+              color: 'danger', 
+              message: "my-multibranch-pipeline » master - Performance Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+              notifyCommitters: true, 
+              teamDomain: 'africatripworkspace', 
+              tokenCredentialId: 'Slack', 
+              username: 'jenkins'
+            }
+            
+          }
+
+        }
+
+        stage ("End-to-End Testing") {
+
+          steps {
+
+            echo "Testing UI expectations"  
+
+          }
+          
+          post {
+            
+            failure {
+              emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+                recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
+                subject: '$PROJECT_NAME - End-to-End Testing # $BUILD_NUMBER - $BUILD_STATUS !', 
+                to: 'darrylnoumen3@gmail.com'
+
+              slackSend channel: '#devops-environment', 
+              color: 'danger', 
+              message: "my-multibranch-pipeline » master - End-to-End Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+              notifyCommitters: true, 
+              teamDomain: 'africatripworkspace', 
+              tokenCredentialId: 'Slack', 
+              username: 'jenkins'
+            }
+            
+          }
+
+        }
+
+      }
+      
+    }
+
+    stage ("Canary Deployment") {
+ 
+      steps {
+
+        echo "Supplying my website releases using canary deployment method"
+
+      }
+      
+      post {
+        
+        failure {
+          emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+            recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
+            subject: '$PROJECT_NAME - Canary Deployment # $BUILD_NUMBER - $BUILD_STATUS !', 
+            to: 'darrylnoumen3@gmail.com'
+
+          slackSend channel: '#devops-environment', 
+          color: 'danger', 
+          message: "my-multibranch-pipeline » master - Canary Deployment # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          notifyCommitters: true, 
+          teamDomain: 'africatripworkspace', 
+          tokenCredentialId: 'Slack', 
+          username: 'jenkins'
         }
         
       }
       
     }
     
-    stage("Feedback") {
+    stage ("Feedback") {
       
       steps {
         

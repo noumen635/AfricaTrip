@@ -9,6 +9,30 @@ pipeline {
   }
   
   stages {
+
+    stage("Build") {
+ 
+      steps {
+
+        echo "Building my application"
+
+        sh "docker build -t noumendarryl/africatrip:v1.${BUILD_NUMBER} ."
+        sh "docker build -t noumendarryl/africatrip:latest ."
+
+      }
+      
+      post {
+        
+        failure {
+          emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+            recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
+            subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS !', 
+            to: 'darrylnoumen3@gmail.com'
+        }
+        
+      }
+      
+    }
     
     stage('SonarQube analysis') {
       
@@ -66,30 +90,6 @@ pipeline {
       
     }
 
-    stage("Build") {
- 
-      steps {
-
-        echo "Building my application"
-
-        sh "docker build -t noumendarryl/africatrip:v1.${BUILD_NUMBER} ."
-        sh "docker build -t noumendarryl/africatrip:latest ."
-
-      }
-      
-      post {
-        
-        failure {
-          emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
-            recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
-            subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS !', 
-            to: 'darrylnoumen3@gmail.com'
-        }
-        
-      }
-      
-    }
-    
     stage("Tests") {
       
       steps {

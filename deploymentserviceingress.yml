@@ -33,6 +33,7 @@ spec:
       containers:
         - name: my-website
           image: noumendarryl/africatrip:latest
+          imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 80
 

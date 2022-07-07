@@ -13,7 +13,7 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="africatrip" enabled="true">
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
@@ -54,16 +54,18 @@
             <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">1</intProp>
+            <stringProp name="Assertion.scope">all</stringProp>
           </ResponseAssertion>
           <hashTree/>
           <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
             <stringProp name="DurationAssertion.duration">2000</stringProp>
+            <stringProp name="Assertion.scope">all</stringProp>
           </DurationAssertion>
           <hashTree/>
           <HTMLAssertion guiclass="HTMLAssertionGui" testclass="HTMLAssertion" testname="HTML Assertion" enabled="true">
             <longProp name="html_assertion_error_threshold">50</longProp>
             <longProp name="html_assertion_warning_threshold">50</longProp>
-            <stringProp name="html_assertion_doctype">strict</stringProp>
+            <stringProp name="html_assertion_doctype">omit</stringProp>
             <boolProp name="html_assertion_errorsonly">false</boolProp>
             <longProp name="html_assertion_format">0</longProp>
             <stringProp name="html_assertion_filename"></stringProp>
@@ -116,16 +118,18 @@
             <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">1</intProp>
+            <stringProp name="Assertion.scope">all</stringProp>
           </ResponseAssertion>
           <hashTree/>
           <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
             <stringProp name="DurationAssertion.duration">2000</stringProp>
+            <stringProp name="Assertion.scope">all</stringProp>
           </DurationAssertion>
           <hashTree/>
           <HTMLAssertion guiclass="HTMLAssertionGui" testclass="HTMLAssertion" testname="HTML Assertion" enabled="true">
             <longProp name="html_assertion_error_threshold">50</longProp>
             <longProp name="html_assertion_warning_threshold">50</longProp>
-            <stringProp name="html_assertion_doctype">strict</stringProp>
+            <stringProp name="html_assertion_doctype">omit</stringProp>
             <boolProp name="html_assertion_errorsonly">false</boolProp>
             <longProp name="html_assertion_format">0</longProp>
             <stringProp name="html_assertion_filename"></stringProp>
@@ -178,16 +182,18 @@
             <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">1</intProp>
+            <stringProp name="Assertion.scope">all</stringProp>
           </ResponseAssertion>
           <hashTree/>
           <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
             <stringProp name="DurationAssertion.duration">2000</stringProp>
+            <stringProp name="Assertion.scope">all</stringProp>
           </DurationAssertion>
           <hashTree/>
           <HTMLAssertion guiclass="HTMLAssertionGui" testclass="HTMLAssertion" testname="HTML Assertion" enabled="true">
             <longProp name="html_assertion_error_threshold">50</longProp>
             <longProp name="html_assertion_warning_threshold">50</longProp>
-            <stringProp name="html_assertion_doctype">strict</stringProp>
+            <stringProp name="html_assertion_doctype">omit</stringProp>
             <boolProp name="html_assertion_errorsonly">false</boolProp>
             <longProp name="html_assertion_format">0</longProp>
             <stringProp name="html_assertion_filename"></stringProp>
@@ -240,16 +246,18 @@
             <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">1</intProp>
+            <stringProp name="Assertion.scope">all</stringProp>
           </ResponseAssertion>
           <hashTree/>
           <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
             <stringProp name="DurationAssertion.duration">2000</stringProp>
+            <stringProp name="Assertion.scope">all</stringProp>
           </DurationAssertion>
           <hashTree/>
           <HTMLAssertion guiclass="HTMLAssertionGui" testclass="HTMLAssertion" testname="HTML Assertion" enabled="true">
             <longProp name="html_assertion_error_threshold">50</longProp>
             <longProp name="html_assertion_warning_threshold">50</longProp>
-            <stringProp name="html_assertion_doctype">strict</stringProp>
+            <stringProp name="html_assertion_doctype">omit</stringProp>
             <boolProp name="html_assertion_errorsonly">false</boolProp>
             <longProp name="html_assertion_format">0</longProp>
             <stringProp name="html_assertion_filename"></stringProp>
@@ -302,16 +310,18 @@
             <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">1</intProp>
+            <stringProp name="Assertion.scope">all</stringProp>
           </ResponseAssertion>
           <hashTree/>
           <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
             <stringProp name="DurationAssertion.duration">2000</stringProp>
+            <stringProp name="Assertion.scope">all</stringProp>
           </DurationAssertion>
           <hashTree/>
           <HTMLAssertion guiclass="HTMLAssertionGui" testclass="HTMLAssertion" testname="HTML Assertion" enabled="true">
             <longProp name="html_assertion_error_threshold">50</longProp>
             <longProp name="html_assertion_warning_threshold">50</longProp>
-            <stringProp name="html_assertion_doctype">strict</stringProp>
+            <stringProp name="html_assertion_doctype">omit</stringProp>
             <boolProp name="html_assertion_errorsonly">false</boolProp>
             <longProp name="html_assertion_format">0</longProp>
             <stringProp name="html_assertion_filename"></stringProp>

@@ -16,15 +16,6 @@ header {
   animation-iteration-count: infinite;
 }
 
-@keyframes image {
-  0%{
-    background-image: url(../img/back2.jpg);
-  }
-  100%{
-    background-image: url(../img/back3.jpg);
-  }
-}
-
 .logo {
   float: left;
   padding: 10px 30px;

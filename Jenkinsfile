@@ -86,7 +86,7 @@ pipeline {
 
       when {
 
-        branch "develop"
+        branch "pre-develop"
 
       }
 

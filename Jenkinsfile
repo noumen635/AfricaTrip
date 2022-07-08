@@ -84,6 +84,12 @@ pipeline {
 
     stage ("Unit and Integration Tests") {
 
+      when {
+
+        branch "develop$"
+
+      }
+
       parallel {
 
         stage ("Unit Testing") {
@@ -116,12 +122,6 @@ pipeline {
         }
 
         stage ("Integration Testing") {
-
-          when {
-
-            branch "develop$"
-
-          }
 
           steps {
 

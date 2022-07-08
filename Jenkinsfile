@@ -223,14 +223,14 @@ pipeline {
      steps {
 
       echo "Deploying my website on k8s"
-       sh "docker-compose up -d"
-      // script {
+      //  sh "docker-compose up -d"
+      script {
 
-      //   sh "kubectl apply -f deploymentserviceingress.yml" 
-      //   sh "minikube kubectl get all"
-      //   sh "minikube service --url africatrip-service"
+        sh "kubectl apply -f deploymentserviceingress.yml" 
+        sh "minikube kubectl get all"
+        sh "minikube service --url africatrip-service"
 
-      // }
+      }
 
      }
       

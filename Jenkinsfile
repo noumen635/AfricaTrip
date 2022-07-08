@@ -88,10 +88,14 @@ pipeline {
 
         stage ("Unit Testing") {
 
-          when {
+          script {
 
-            branch "develop$"
+            when {
 
+              branch "develop$"
+
+            }
+            
           }
 
           steps {
@@ -123,9 +127,13 @@ pipeline {
 
         stage ("Integration Testing") {
 
-          when {
+          script {
 
-            branch "develop$"
+            when {
+
+              branch "develop$"
+
+            }
 
           }
 

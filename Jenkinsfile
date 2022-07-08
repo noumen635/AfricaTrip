@@ -218,19 +218,19 @@ pipeline {
       
     }
       
-    stage ("Deploy on kubernetes") {
+    stage ("Deploy on docker") {
       
      steps {
 
-      echo "Deploying my website on k8s"
-      //  sh "docker-compose up -d"
-      script {
+      echo "Deploying my website on docker"
+       sh "docker-compose up -d"
+      // script {
 
-        sh "kubectl apply -f deploymentserviceingress.yml" 
-        sh "minikube kubectl get all"
-        sh "minikube service --url africatrip-service"
+      //   sh "kubectl apply -f deploymentserviceingress.yml" 
+      //   sh "minikube kubectl get all"
+      //   sh "minikube service --url africatrip-service"
 
-      }
+      // }
 
      }
       
@@ -239,12 +239,12 @@ pipeline {
         failure {
           emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.', 
             recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
-            subject: '$PROJECT_NAME - Kubernetes Deployment # $BUILD_NUMBER - $BUILD_STATUS !', 
+            subject: '$PROJECT_NAME - Docker Deployment # $BUILD_NUMBER - $BUILD_STATUS !', 
             to: 'darrylnoumen3@gmail.com'
 
           slackSend channel: '#devops-environment', 
           color: 'danger', 
-          message: "my-multibranch-pipeline » master - Kubernetes Deployment # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          message: "my-multibranch-pipeline » master - Docker Deployment # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 

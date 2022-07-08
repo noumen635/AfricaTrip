@@ -11,6 +11,12 @@ pipeline {
   stages {
     
     stage ('SonarQube analysis') {
+
+      when {
+
+        branch "develop | pre-develop"
+
+      }
       
       steps {
 
@@ -50,6 +56,12 @@ pipeline {
     }
     
     stage ("Quality Gate") {
+
+      when {
+
+        branch "develop | pre-develop"
+
+      }
       
       steps {
 
@@ -86,7 +98,7 @@ pipeline {
 
       when {
 
-        branch "pre-develop"
+        branch "develop | pre-develop"
 
       }
 

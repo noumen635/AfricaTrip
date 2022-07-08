@@ -11,12 +11,6 @@ pipeline {
   stages {
     
     stage ('SonarQube analysis') {
-
-      when {
-
-        branch "develop$"
-
-      }
       
       steps {
 
@@ -56,12 +50,6 @@ pipeline {
     }
     
     stage ("Quality Gate") {
-
-      when {
-
-        branch "develop$"
-
-      }
       
       steps {
 
@@ -95,12 +83,6 @@ pipeline {
     }
 
     stage ("Unit and Integration Tests") {
-
-      when {
-
-        branch "develop$"
-
-      }
 
       parallel {
 

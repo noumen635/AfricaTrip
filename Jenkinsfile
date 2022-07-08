@@ -14,7 +14,7 @@ pipeline {
 
       when {
 
-        branch "develop|pre-develop"
+        branch "develop*"
 
       }
       
@@ -59,7 +59,7 @@ pipeline {
 
       when {
 
-        branch "develop|pre-develop"
+        branch "develop*"
 
       }
       
@@ -98,7 +98,7 @@ pipeline {
 
       when {
 
-        branch "develop|pre-develop"
+        branch "develop*"
 
       }
 

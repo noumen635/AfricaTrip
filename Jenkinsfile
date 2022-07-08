@@ -119,7 +119,7 @@ pipeline {
 
           script {
 
-              when {
+            when {
 
               branch "develop$"
 

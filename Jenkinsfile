@@ -117,13 +117,9 @@ pipeline {
 
         stage ("Integration Testing") {
 
-          script {
+          when {
 
-            when {
-
-              branch "develop$"
-
-            }
+            branch "develop$"
 
           }
 

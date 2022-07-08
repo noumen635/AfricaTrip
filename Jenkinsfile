@@ -88,6 +88,12 @@ pipeline {
 
         stage ("Unit Testing") {
 
+          when {
+
+            branch "develop$"
+
+          }
+
           steps {
 
             echo "Testing my website unit functions"
@@ -116,6 +122,12 @@ pipeline {
         }
 
         stage ("Integration Testing") {
+
+          when {
+
+            branch "develop$"
+
+          }
 
           steps {
 

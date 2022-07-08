@@ -88,16 +88,6 @@ pipeline {
 
         stage ("Unit Testing") {
 
-          script {
-
-            when {
-
-              branch "develop$"
-
-            }
-            
-          }
-
           steps {
 
             echo "Testing my website unit functions"
@@ -129,7 +119,7 @@ pipeline {
 
           script {
 
-            when {
+              when {
 
               branch "develop$"
 

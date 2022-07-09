@@ -38,7 +38,7 @@ pipeline {
 
           slackSend channel: '#devops-environment', 
           color: 'danger', 
-          message: "my-multibranch-pipeline » master - SonarQube Analysis # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          message: "my-multibranch-pipeline » ${env.env.BRANCH_NAME} - SonarQube Analysis # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 
@@ -71,7 +71,7 @@ pipeline {
 
           slackSend channel: '#devops-environment', 
           color: 'danger', 
-          message: "my-multibranch-pipeline » master - Quality Gate # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Quality Gate # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 
@@ -104,7 +104,7 @@ pipeline {
 
               slackSend channel: '#devops-environment', 
               color: 'danger', 
-              message: "my-multibranch-pipeline » master - Unit Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+              message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Unit Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
               notifyCommitters: true, 
               teamDomain: 'africatripworkspace', 
               tokenCredentialId: 'Slack', 
@@ -133,7 +133,7 @@ pipeline {
 
               slackSend channel: '#devops-environment', 
               color: 'danger', 
-              message: "my-multibranch-pipeline » master - Integration Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+              message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Integration Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
               notifyCommitters: true, 
               teamDomain: 'africatripworkspace', 
               tokenCredentialId: 'Slack', 
@@ -169,7 +169,7 @@ pipeline {
 
           slackSend channel: '#devops-environment', 
           color: 'danger', 
-          message: "my-multibranch-pipeline » master - Build Stage # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Build Stage # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 
@@ -207,7 +207,7 @@ pipeline {
 
           slackSend channel: '#devops-environment', 
           color: 'danger', 
-          message: "my-multibranch-pipeline » master - Artifactory Storage # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Artifactory Storage # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 
@@ -226,7 +226,6 @@ pipeline {
       // sh "docker-compose up -d"
       script {
 
-        sh "kubectl cluster-info"
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
         // sh "minikube service --url africatrip-service"
@@ -246,7 +245,7 @@ pipeline {
 
           slackSend channel: '#devops-environment', 
           color: 'danger', 
-          message: "my-multibranch-pipeline » master - Kubernetes Deployment # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Kubernetes Deployment # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 
@@ -281,7 +280,7 @@ pipeline {
 
               slackSend channel: '#devops-environment', 
               color: 'danger', 
-              message: "my-multibranch-pipeline » master - Performance Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+              message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Performance Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
               notifyCommitters: true, 
               teamDomain: 'africatripworkspace', 
               tokenCredentialId: 'Slack', 
@@ -310,7 +309,7 @@ pipeline {
 
               slackSend channel: '#devops-environment', 
               color: 'danger', 
-              message: "my-multibranch-pipeline » master - End-to-End Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+              message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - End-to-End Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
               notifyCommitters: true, 
               teamDomain: 'africatripworkspace', 
               tokenCredentialId: 'Slack', 
@@ -343,7 +342,7 @@ pipeline {
 
           slackSend channel: '#devops-environment', 
           color: 'danger', 
-          message: "my-multibranch-pipeline » master - Canary Deployment # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Canary Deployment # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 
@@ -365,7 +364,7 @@ pipeline {
         
         slackSend channel: '#devops-environment', 
           color: 'good', 
-          message: "my-multibranch-pipeline » master - Pipeline # ${env.BUILD_NUMBER} - Successful : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Pipeline # ${env.BUILD_NUMBER} - Successful : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
           notifyCommitters: true, 
           teamDomain: 'africatripworkspace', 
           tokenCredentialId: 'Slack', 

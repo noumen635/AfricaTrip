@@ -226,12 +226,11 @@ pipeline {
       // sh "docker-compose up -d"
       script {
 
-        // sh "minikube start --force"
-        // sh "kubectl cluster-info"
-        // sh "kubectl apply -f deploymentserviceingress.yml" 
-        // sh "minikube kubectl get all"
-        // sh "minikube service --url africatrip-service"
-        kubernetesDeploy(configs: "deploymentserviceingress.yml", kubeconfigId: "kubeconfig")
+        sh "kubectl cluster-info"
+        sh "kubectl apply -f deploymentserviceingress.yml" 
+        sh "minikube kubectl get all"
+        sh "minikube service --url africatrip-service"
+        // kubernetesDeploy(configs: "deploymentserviceingress.yml", kubeconfigId: "kubeconfig")
 
       }
 

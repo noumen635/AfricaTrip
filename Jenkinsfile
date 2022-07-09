@@ -229,7 +229,7 @@ pipeline {
         sh "kubectl cluster-info"
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
-        sh "minikube service --url africatrip-service"
+        // sh "minikube service --url africatrip-service"
         // kubernetesDeploy(configs: "deploymentserviceingress.yml", kubeconfigId: "kubeconfig")
 
       }

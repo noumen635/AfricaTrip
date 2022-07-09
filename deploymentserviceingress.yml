@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: my-website
-          image: noumendarryl/africatrip:latest
+          image: https://jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 80

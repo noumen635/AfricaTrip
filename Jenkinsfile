@@ -226,7 +226,8 @@ pipeline {
       // sh "docker-compose up -d"
       script {
 
-        sh "minikube start --force"
+        // sh "minikube start --force"
+        sh "kubectl cluster-info"
         sh "minikube status"
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"

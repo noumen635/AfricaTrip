@@ -31,8 +31,8 @@ spec:
         app: africatrip
     spec:
       containers:
-        - name: my-website
-          image: https://jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest
+        - name: africatrip
+          image: noumendarryl/africatrip:latest
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 80

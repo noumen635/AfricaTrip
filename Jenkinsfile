@@ -228,7 +228,6 @@ pipeline {
 
         // sh "minikube start --force"
         sh "kubectl cluster-info"
-        sh "minikube status"
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
         sh "minikube service --url africatrip-service"

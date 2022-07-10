@@ -8,8 +8,8 @@ spec:
   type: LoadBalancer
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 80
+    port: 80 # this is the service port
+    targetPort: 80 # this is the container port
     nodePort: 30050
 
 ---

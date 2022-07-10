@@ -19,4 +19,4 @@ const hide = document.querySelector(".hide");
 //   navMenu.style.width = "0";
 // }
 
-module.exports = { openMenuToogle, closeMenuToogle, navMenu, hamburger, close, show, hide };
+module.exports = { navMenu, hamburger, close, show, hide };

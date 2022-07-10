@@ -2,12 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: africatrip-service
-  namespace: default
 spec:
   selector:
     app: africatrip
+  type: LoadBalancer
   ports:
-  - port: 80
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30050
 
 ---
 
@@ -40,7 +43,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: africatrip-ingress
-  namespace: default
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -55,4 +57,3 @@ spec:
                 name: africatrip-service
                 port:
                   number: 80
-                  

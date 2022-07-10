@@ -20,4 +20,4 @@ function closeMenuToogle () {
 // hamburger.addEventListener("click", openMenuToogle);
 // close.addEventListener("click", closeMenuToogle);
 
-module.exports = openMenuToogle, closeMenuToogle, navMenu, hamburger, close
+module.exports = openMenuToogle, closeMenuToogle, navMenu, hamburger, close;

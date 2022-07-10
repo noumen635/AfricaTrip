@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { openMenuToogle, closeMenuToogle, navMenu, hamburger, close, show, hide } = require('./js/index.js');
+const { openMenuToogle, closeMenuToogle, navMenu, hamburger, close, show, hide } = require('./js/index');
 
 test('test if all the html elements exist', () => {
   expect(navMenu).not.toBeNull()

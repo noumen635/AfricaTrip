@@ -19,4 +19,4 @@ function closeMenuToogle() {
   navMenu.style.width = "0";
 }
 
-module.exports = openMenuToogle, closeMenuToogle, navMenu, hamburger, close, show, hide;
+module.exports = { openMenuToogle, closeMenuToogle, navMenu, hamburger, close, show, hide };

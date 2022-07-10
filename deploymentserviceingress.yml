@@ -5,12 +5,8 @@ metadata:
 spec:
   selector:
     app: africatrip
-  type: LoadBalancer
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-    nodePort: 30050
+  - port: 80
 
 ---
 

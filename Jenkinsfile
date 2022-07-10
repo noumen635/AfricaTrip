@@ -92,7 +92,7 @@ pipeline {
 
             echo "Testing my website unit functions"
             sh "npm test"
-            
+
           }
           
           post {
@@ -224,11 +224,11 @@ pipeline {
      steps {
 
       echo "Deploying my website on k8s"
-      // sh "docker-compose up -d"
+      sh "docker-compose up -d"
       script {
 
-        sh "kubectl apply -f deploymentserviceingress.yml" 
-        sh "minikube kubectl get all"
+        // sh "kubectl apply -f deploymentserviceingress.yml" 
+        // sh "minikube kubectl get all"
         // sh "minikube service --url africatrip-service"
         // kubernetesDeploy(configs: "deploymentserviceingress.yml", kubeconfigId: "kubeconfig")
 

@@ -123,8 +123,8 @@ pipeline {
           steps {
 
             echo "Testing my website unit functions"
-            sh "npm install jest"
-            sh "npm test"
+            // sh "npm install jest"
+            // sh "npm test"
 
           }
           
@@ -225,15 +225,15 @@ pipeline {
      steps {
 
       echo "Deploying my website on k8s"
-      sh "docker-compose up -d"
-      // script {
+      // sh "docker-compose up -d"
+      script {
 
-      //   sh "kubectl apply -f deploymentserviceingress.yml" 
-      //   sh "minikube kubectl get all"
-      //   sh "minikube service --url africatrip-service"
-      //   kubernetesDeploy(configs: "deploymentserviceingress.yml", kubeconfigId: "kubeconfig")
+        sh "kubectl apply -f deploymentserviceingress.yml" 
+        sh "minikube kubectl get all"
+        sh "minikube service --url africatrip-service"
+        // kubernetesDeploy(configs: "deploymentserviceingress.yml", kubeconfigId: "kubeconfig")
 
-      // }
+      }
 
      }
       

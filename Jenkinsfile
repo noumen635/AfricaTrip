@@ -123,6 +123,7 @@ pipeline {
           steps {
 
             echo "Testing my website unit functions"
+            sh "npm install jest"
             sh "npm test"
 
           }

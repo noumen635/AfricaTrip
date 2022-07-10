@@ -55,3 +55,4 @@ spec:
                 name: africatrip-service
                 port:
                   number: 80
+                  

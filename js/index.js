@@ -2,21 +2,39 @@
 const hamburger = document.querySelector(".hamburger");
 const close = document.querySelector(".close");
 const navMenu = document.querySelector(".navigation-menu");
-const show = document.querySelector(".show");
-const hide = document.querySelector(".hide");
 
-// function openMenuToogle() {
-//   navMenu.classList.toggle("show");
-//   hamburger.classList.toggle("hide");
-//   navMenu.style.right = "0";
-//   navMenu.style.width = "16rem";
-// }
+function addShow() {
+  navMenu.classList.toggle("show");
+  return navMenu.toggleAttribute("show");
+}
 
-// function closeMenuToogle() {
-//   navMenu.classList.toggle("show");
-//   hamburger.classList.toggle("hide");
-//   navMenu.style.right = "-16rem";
-//   navMenu.style.width = "0";
-// }
+function addHide() {
+  hamburger.classList.toggle("hide");
+  return hamburger.toggleAttribute("hide");
+}
 
-module.exports = { navMenu, hamburger, close, show, hide };
+function addMenuToggleDimensions(x, y) {
+  navMenu.style.right = x;
+  navMenu.style.width =  y + "rem";
+  return navMenu.style.right, navMenu.style.width;
+}
+
+function removeMenuToggleDimensions(a, b) {
+  navMenu.style.right = "-" + a + "rem";
+  navMenu.style.width =  b;
+  return navMenu.style.right, navMenu.style.width;
+}
+
+function openMenuToogle() {
+  addShow();
+  addHide();
+  addMenuToggleDimensions(0,16);
+}
+
+function closeMenuToogle() {
+  addShow();
+  addHide();
+  removeMenuToggleDimensions(16,0);
+}
+
+module.exports = { openMenuToogle, closeMenuToogle, addShow, addHide, addMenuToggleDimensions, removeMenuToggleDimensions };

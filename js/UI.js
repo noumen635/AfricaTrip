@@ -3,9 +3,7 @@ require("chromedriver");
 require("geckodriver");
 
 async function africatrip() {
-  // let chromedriver = await new Builder().forBrowser("chrome").build();
   let firefoxdriver = await new Builder().forBrowser("firefox").build();
-  // let driver = new Builder().usingServer("http://35.219.189.235:4444/wd/hub").forBrowser("firefox").build();
 
   await firefoxdriver.get("http://35.219.189.235/");
 

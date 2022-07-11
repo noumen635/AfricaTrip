@@ -21,16 +21,11 @@ header {
   padding: 10px 30px;
 }
 
-.logo a {
+.logo a img{
   width: 80px;
   height: 80px;
   border-radius: 40px;
   margin-right: 20px;
-}
-
-.logo a em {
-  font-size: 4.5rem;
-  color: #222831;
 }
 
 .hamburger,

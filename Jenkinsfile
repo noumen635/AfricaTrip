@@ -123,8 +123,8 @@ pipeline {
           steps {
 
             echo "Testing my website unit functions"
-            // sh "npm install jest"
-            // sh "npm test"
+            sh "npm install jest"
+            sh "npm test"
 
           }
           
@@ -230,8 +230,7 @@ pipeline {
 
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
-        // sh "minikube service --url africatrip-service"
-        // kubernetesDeploy(configs: "deploymentserviceingress.yml", kubeconfigId: "kubeconfig")
+        // sh "minikube service africatrip-service --url"
 
       }
 
@@ -297,7 +296,9 @@ pipeline {
 
           steps {
 
-            echo "Testing UI expectations"  
+            echo "Testing UI expectations"
+            sh "npm install --save selenium-webdriver chromedriver geckodriver" 
+            sh "node ./js/UI.js" 
 
           }
           

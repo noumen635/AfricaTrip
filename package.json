@@ -20,5 +20,10 @@
   "devDependencies": {
     "jest": "^28.1.2",
     "jest-environment-jsdom": "^28.1.2"
+  },
+  "dependencies": {
+    "chromedriver": "^103.0.0",
+    "geckodriver": "^3.0.2",
+    "selenium-webdriver": "^4.3.1"
   }
 }

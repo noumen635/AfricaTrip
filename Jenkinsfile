@@ -179,6 +179,25 @@ pipeline {
         }
 
       }
+
+      post {
+            
+        failure {
+          emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+            recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
+            subject: '$PROJECT_NAME - Performance Testing # $BUILD_NUMBER - $BUILD_STATUS !', 
+            to: 'darrylnoumen3@gmail.com'
+
+          slackSend channel: '#devops-environment', 
+          color: 'danger', 
+          message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Performance Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          notifyCommitters: true, 
+          teamDomain: 'africatripworkspace', 
+          tokenCredentialId: 'Slack', 
+          username: 'jenkins'
+        }
+            
+      }
       
     }
     
@@ -297,7 +316,7 @@ pipeline {
           steps {
 
             echo "Testing UI expectations"
-            sh "npm install --save selenium-webdriver chromedriver geckodriver" 
+            sh "npm install" 
             sh "node ./js/UI.js" 
 
           }
@@ -323,6 +342,25 @@ pipeline {
 
         }
 
+      }
+
+      post {
+            
+        failure {
+          emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+            recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']], 
+            subject: '$PROJECT_NAME - Performance Testing # $BUILD_NUMBER - $BUILD_STATUS !', 
+            to: 'darrylnoumen3@gmail.com'
+
+          slackSend channel: '#devops-environment', 
+          color: 'danger', 
+          message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Performance Testing # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+          notifyCommitters: true, 
+          teamDomain: 'africatripworkspace', 
+          tokenCredentialId: 'Slack', 
+          username: 'jenkins'
+        }
+            
       }
       
     }

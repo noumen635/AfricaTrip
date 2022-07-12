@@ -37,4 +37,4 @@ function closeMenuToogle() {
   removeMenuToggleDimensions(16,0);
 }
 
-module.exports = { openMenuToogle, closeMenuToogle, addShow, addHide, addMenuToggleDimensions, removeMenuToggleDimensions };
+module.exports = { addShow, addHide, addMenuToggleDimensions, removeMenuToggleDimensions };

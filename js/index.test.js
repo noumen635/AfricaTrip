@@ -24,3 +24,19 @@ test('test if it is possible to remove dimensions to the navMenu element', () =>
   expect(a).toBe("-5rem");
   expect(b).toBe(8);
 })
+
+test('test if it is possible to open the menu toggle', () => {
+  if(addShow() && addHide()) {
+    const { u, v } = addMenuToggleDimensions(2, 3);
+    expect(u).toBe(2);
+    expect(v).toBe("3rem")
+  } 
+})
+
+test('test if it is possible to close the menu toggle', () => {
+  if(addShow() && addHide()) {
+    const { c, d } = removeMenuToggleDimensions(2, 3);
+    expect(c).toBe("-2rem");
+    expect(d).toBe(3)
+  } 
+})

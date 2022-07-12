@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1657547281254" clover="3.2.0">
-  <project timestamp="1657547281254" name="All files">
-    <metrics statements="20" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3" elements="26" coveredelements="10" complexity="0" loc="20" ncloc="20" packages="1" files="1" classes="1"/>
+<coverage generated="1657574866747" clover="3.2.0">
+  <project timestamp="1657574866748" name="All files">
+    <metrics statements="20" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="4" elements="26" coveredelements="12" complexity="0" loc="20" ncloc="20" packages="1" files="1" classes="1"/>
     <file name="index.js" path="C:\Users\NOUMEN DARRYL\Documents\AfricaTrip\js\index.js">
-      <metrics statements="20" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3"/>
+      <metrics statements="20" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="4"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
-      <line num="7" count="0" type="stmt"/>
+      <line num="7" count="3" type="stmt"/>
       <line num="8" count="0" type="stmt"/>
       <line num="12" count="1" type="stmt"/>
       <line num="13" count="0" type="stmt"/>

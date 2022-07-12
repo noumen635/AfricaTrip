@@ -7,8 +7,8 @@ FN:22,removeMenuToggleDimensions
 FN:28,openMenuToogle
 FN:34,closeMenuToogle
 FNF:6
-FNH:3
-FNDA:0,addShow
+FNH:4
+FNDA:3,addShow
 FNDA:1,addHide
 FNDA:1,addMenuToggleDimensions
 FNDA:1,removeMenuToggleDimensions
@@ -17,7 +17,7 @@ FNDA:0,closeMenuToogle
 DA:2,1
 DA:3,1
 DA:4,1
-DA:7,0
+DA:7,3
 DA:8,0
 DA:12,1
 DA:13,0
@@ -35,7 +35,7 @@ DA:36,0
 DA:37,0
 DA:40,1
 LF:20
-LH:7
+LH:8
 BRF:0
 BRH:0
 end_of_record

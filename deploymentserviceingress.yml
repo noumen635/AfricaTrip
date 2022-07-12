@@ -39,6 +39,7 @@ spec:
     metadata:
       labels:
         app: africatrip
+        track: stable
     spec:
       imagePullSecrets:
         - name: jfrogkey

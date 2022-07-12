@@ -247,7 +247,7 @@ pipeline {
       // sh "docker-compose up -d"
       script {
 
-        sh "docker pull jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
+        // sh "kubectl create secret generic JfrogKey --from-file=.dockerconfigjson --type=kubernetes.io/dockerconfigjson"
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
 

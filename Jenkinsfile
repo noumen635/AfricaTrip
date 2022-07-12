@@ -207,20 +207,14 @@ pipeline {
 
         echo "Packaging and storing the dependencies of my website"
 
-        withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
-          sh "docker login -u noumendarryl -p ${Docker_PWD}"
+        withCredentials([usernamePassword(credentialsId: 'JfrogID', passwordVariable: 'JfrogPWD', usernameVariable: 'JfrogID')]) {
+          sh "docker login -u ${JfrogID} -p ${JfrogPWD} jabaspace.jfrog.io"
         }
-        sh "docker push noumendarryl/africatrip:v1.${BUILD_NUMBER}"
-        sh "docker push noumendarryl/africatrip:latest"
 
-        // withCredentials([usernamePassword(credentialsId: 'JfrogID', passwordVariable: 'JfrogPWD', usernameVariable: 'JfrogID')]) {
-        //   sh "docker login -u ${JfrogID} -p ${JfrogPWD} jabaspace.jfrog.io"
-        // }
-
-        // sh "docker tag noumendarryl/africatrip:v1.${BUILD_NUMBER} jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
-        // sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
-        // sh "docker tag noumendarryl/africatrip:latest jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
-        // sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
+        sh "docker tag noumendarryl/africatrip:v1.${BUILD_NUMBER} jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
+        sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:v1.${BUILD_NUMBER}"
+        sh "docker tag noumendarryl/africatrip:latest jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
+        sh "docker push jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
         
       }
       

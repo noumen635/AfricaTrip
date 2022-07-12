@@ -207,6 +207,12 @@ pipeline {
 
         echo "Packaging and storing the dependencies of my website"
 
+        withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
+          sh "docker login -u noumendarryl -p ${Docker_PWD}"
+        }
+        sh "docker push noumendarryl/africatrip:v1.${BUILD_NUMBER}"
+        sh "docker push noumendarryl/africatrip:latest"
+
         withCredentials([usernamePassword(credentialsId: 'JfrogID', passwordVariable: 'JfrogPWD', usernameVariable: 'JfrogID')]) {
           sh "docker login -u ${JfrogID} -p ${JfrogPWD} jabaspace.jfrog.io"
         }
@@ -248,9 +254,6 @@ pipeline {
 
       script {
 
-        withCredentials([usernamePassword(credentialsId: 'JFrogKey', passwordVariable: 'JFrogkeyPWD', usernameVariable: 'JFrogKeyID')]) {
-          sh "kubectl create secret docker-registry jfrogkey --docker-username=${JFrogKeyID} --docker-password=${JFrogkeyPWD}"
-        }
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
 

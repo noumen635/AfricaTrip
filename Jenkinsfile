@@ -248,8 +248,8 @@ pipeline {
 
       script {
 
-        withCredentials([usernamePassword(credentialsId: 'JFrogKey', passwordVariable: 'JFrogkeyPWD', usernameVariable: 'JFrogKey')]) {
-          sh "kubectl create secret docker-registry jfrogkey --docker-username=${JFrogKey} --docker-password=${JFrogkeyPWD}"
+        withCredentials([usernamePassword(credentialsId: 'JFrogKey', passwordVariable: 'JFrogkeyPWD', usernameVariable: 'JFrogKeyID')]) {
+          sh "kubectl create secret docker-registry jfrogkey --docker-username=${JFrogKeyID} --docker-password=${JFrogkeyPWD}"
         }
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"

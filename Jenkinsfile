@@ -247,7 +247,7 @@ pipeline {
       // sh "docker-compose up -d"
       script {
 
-        sh "minikube kubectl apply -f deploymentserviceingress.yml" 
+        sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
 
       }

@@ -123,8 +123,8 @@ pipeline {
           steps {
 
             echo "Testing my website unit functions"
-            // sh "npm install jest"
-            // sh "npm test"
+            sh "npm install jest"
+            sh "npm test"
 
           }
           
@@ -322,8 +322,8 @@ pipeline {
           steps {
 
             echo "Testing UI expectations"
-            // sh "npm install --save selenium-webdriver chromedriver geckodriver" 
-            // sh "node ./js/UI.js" 
+            sh "npm install --save selenium-webdriver chromedriver geckodriver" 
+            sh "node ./js/UI.js" 
 
           }
           

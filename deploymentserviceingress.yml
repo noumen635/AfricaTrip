@@ -14,13 +14,13 @@ spec:
 
 ---
 
-apiVersion: v1
-kind: Secret
-metadata:
-  name: jfrogkey
-data:
-  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJqYWJhc3BhY2UuamZyb2cuaW8iOiB7CgkJCSJhdXRoIjogImJtOTFiV1Z1WkdGeWNubHNRR2R0WVdsc0xtTnZiVHBCUzBOd09HMWFWRGx0VFRRMmJVRlVRMFk0VTFreVpGSktiell6WVZRNFFUTk9VRmxCZWs1d1VVWkZWWGhJV1RFNVFuY3plbVI2UTFGMlExWk9jRWcxZG1aU1FqUmpRWFJPIgoJCX0KCX0KfQ==
-type: kubernetes.io/dockerconfigjson
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: jfrogkey
+# data:
+#   .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJqYWJhc3BhY2UuamZyb2cuaW8iOiB7CgkJCSJhdXRoIjogImJtOTFiV1Z1WkdGeWNubHNRR2R0WVdsc0xtTnZiVHBCUzBOd09HMWFWRGx0VFRRMmJVRlVRMFk0VTFreVpGSktiell6WVZRNFFUTk9VRmxCZWs1d1VVWkZWWGhJV1RFNVFuY3plbVI2UTFGMlExWk9jRWcxZG1aU1FqUmpRWFJPIgoJCX0KCX0KfQ==
+# type: kubernetes.io/dockerconfigjson
 
 ---
 
@@ -40,12 +40,12 @@ spec:
       labels:
         app: africatrip
     spec:
-      imagePullSecrets:
-        - name: jfrogkey
+      # imagePullSecrets:
+      #   - name: jfrogkey
       containers:
         - name: africatrip
           image: noumendarryl/africatrip:latest
-          imagePullPolicy: Always
+          # imagePullPolicy: Always
           ports:
           - containerPort: 80
 

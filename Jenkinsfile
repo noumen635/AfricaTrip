@@ -247,10 +247,10 @@ pipeline {
       // sh "docker-compose up -d"
 
       script {
-        
-        withCredentials([usernamePassword(credentialsId: 'JfrogID', passwordVariable: 'JfrogPWD', usernameVariable: 'JfrogID')]) {
-          sh "kubectl create secret docker-registry jfrogkey --docker-username=${JfrogID} --docker-password=${JfrogPWD}"
-        }
+
+        // withCredentials([usernamePassword(credentialsId: 'JfrogID', passwordVariable: 'JfrogPWD', usernameVariable: 'JfrogID')]) {
+        //   sh "kubectl create secret docker-registry jfrogkey --docker-username=${JfrogID} --docker-password=${JfrogPWD}"
+        // }
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
 

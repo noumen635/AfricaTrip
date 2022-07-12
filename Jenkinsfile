@@ -245,9 +245,13 @@ pipeline {
 
       echo "Deploying my website on k8s"
       // sh "docker-compose up -d"
+      
+      withCredentials([usernamePassword(credentialsId: 'JfrogID', passwordVariable: 'JfrogPWD', usernameVariable: 'JfrogID')]) {
+        sh "kubectl create secret docker-registry jfrogkey --docker-username=${JfrogID} --docker-password=${JfrogPWD}"
+      }
+
       script {
 
-        // sh "kubectl create secret generic JfrogKey --from-file=.dockerconfigjson --type=kubernetes.io/dockerconfigjson"
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
 

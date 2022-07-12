@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: JfrogKey
+  name: jfrogkey
 data:
   .dockerconfigjson: ewogICAgICAgICJhdXRocyI6IHsKICAgICAgICAgICAgICAgICJqYWJhc3BhY2UuamZyb2cuaW8iOiB7CiAgICAgICAgICAgICAgICAgICAgICAgICJhdXRoIjogImJtOTFiV1Z1WkdGeWNubHNRR2R0WVdsc0xtTnZiVHBCUzBOd09HMWFWRGx0VFRRMmJVRlVRMFk0VTFreVpGSktiell6WVZRNFFUTk9VRmxCZWs1d1VVWkZWWGhJV1RFNVFuY3plbVI2UTFGMlExWk9jRWcxZG1aU1FqUmpRWFJPIgogICAgICAgICAgICAgICAgfQogICAgICAgIH0KfQo=
 type: kubernetes.io/dockerconfigjson
@@ -41,7 +41,7 @@ spec:
         app: africatrip
     spec:
       imagePullSecrets:
-      - name: JfrogKey
+      - name: jfrogkey
       containers:
         - name: africatrip
           image: noumendarryl/africatrip:latest

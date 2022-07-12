@@ -247,7 +247,7 @@ pipeline {
       // sh "docker-compose up -d"
       script {
 
-        sh "docker pull jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest:noumendarryl/africatrip:latest"
+        sh "docker pull jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest"
         sh "kubectl apply -f deploymentserviceingress.yml" 
         sh "minikube kubectl get all"
 

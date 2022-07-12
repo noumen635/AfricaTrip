@@ -207,12 +207,6 @@ pipeline {
 
         echo "Packaging and storing the dependencies of my website"
 
-        withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
-          sh "docker login -u noumendarryl -p ${Docker_PWD}"
-        }
-        sh "docker push noumendarryl/africatrip:v1.${BUILD_NUMBER}"
-        sh "docker push noumendarryl/africatrip:latest"
-
         withCredentials([usernamePassword(credentialsId: 'JfrogID', passwordVariable: 'JfrogPWD', usernameVariable: 'JfrogID')]) {
           sh "docker login -u ${JfrogID} -p ${JfrogPWD} jabaspace.jfrog.io"
         }

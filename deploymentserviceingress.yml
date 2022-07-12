@@ -44,7 +44,7 @@ spec:
         - name: jfrogkey
       containers:
         - name: africatrip
-          image: noumendarryl/africatrip:latest
+          image: https://jabaspace.jfrog.io/jabaspace/noumendarryl/africatrip:latest
           imagePullPolicy: Always
           ports:
           - containerPort: 80

@@ -35,7 +35,7 @@ spec:
       containers:
         - name: africatrip
           image: noumendarryl/africatrip:latest
-          imagePullPolicy: Always
+          # imagePullPolicy: Always
           ports:
           - containerPort: 80
 

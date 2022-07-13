@@ -49,38 +49,38 @@ pipeline {
       
     }
     
-    stage ("Quality Gate") {
+    // stage ("Quality Gate") {
       
-      steps {
+    //   steps {
 
-        echo "Applying quality gates to my project"
+    //     echo "Applying quality gates to my project"
 
-        timeout(time: 1, unit: 'HOURS') {
-          waitForQualityGate abortPipeline: true
-        }
+    //     timeout(time: 1, unit: 'HOURS') {
+    //       waitForQualityGate abortPipeline: true
+    //     }
 
-      }
+    //   }
       
-      post {
+    //   post {
         
-        failure {
-          emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
-            recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
-            subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS !', 
-            to: 'darrylnoumen3@gmail.com'
+    //     failure {
+    //       emailext body: 'Check console output at $JOB_URL/$BUILD_NUMBER/console to view the results. Please note that this is an automated email.',
+    //         recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'DevelopersRecipientProvider']],
+    //         subject: '$PROJECT_NAME - Quality Gate # $BUILD_NUMBER - $BUILD_STATUS !', 
+    //         to: 'darrylnoumen3@gmail.com'
 
-          slackSend channel: '#devops-environment', 
-          color: 'danger', 
-          message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Quality Gate # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
-          notifyCommitters: true, 
-          teamDomain: 'africatripworkspace', 
-          tokenCredentialId: 'Slack', 
-          username: 'jenkins'
-        }
+    //       slackSend channel: '#devops-environment', 
+    //       color: 'danger', 
+    //       message: "my-multibranch-pipeline » ${env.BRANCH_NAME} - Quality Gate # ${env.BUILD_NUMBER} - Failed : Check console output at ${env.BUILD_URL} to view the results. Please note that this is an automated email.", 
+    //       notifyCommitters: true, 
+    //       teamDomain: 'africatripworkspace', 
+    //       tokenCredentialId: 'Slack', 
+    //       username: 'jenkins'
+    //     }
         
-      }
+    //   }
       
-    }
+    // }
 
     stage ("Build") {
  

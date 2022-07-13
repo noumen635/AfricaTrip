@@ -1,7 +1,7 @@
 //MENU TOOGLER
-const hamburger = document.querySelector(".hamburger");
-const close = document.querySelector(".close");
-const navMenu = document.querySelector(".navigation-menu");
+// const hamburger = document.querySelector(".hamburger");
+// const close = document.querySelector(".close");
+// const navMenu = document.querySelector(".navigation-menu");
 
 // function addShow() {
 //   navMenu.classList.toggle("show");
@@ -37,4 +37,4 @@ const navMenu = document.querySelector(".navigation-menu");
 //   removeMenuToggleDimensions(16,0);
 // }
 
-module.exports = { addShow, addHide, addMenuToggleDimensions, removeMenuToggleDimensions };
+// module.exports = { addShow, addHide, addMenuToggleDimensions, removeMenuToggleDimensions };

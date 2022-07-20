@@ -37,4 +37,4 @@ function closeMenuToogle() {
   removeMenuToggleDimensions(16,0);
 }
 
-module.exports = { addShow, addHide, addMenuToggleDimensions, removeMenuToggleDimensions };
+module.exports = { hamburger, navMenu, addShow, addHide, addMenuToggleDimensions, removeMenuToggleDimensions };

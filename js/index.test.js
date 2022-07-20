@@ -1,7 +1,12 @@
 /**
  * @jest-environment jsdom
  */
-const {  addShow, addHide, addMenuToggleDimensions, removeMenuToggleDimensions } = require('./index');
+const {  hamburger, navMenu, addShow, addHide, addMenuToggleDimensions, removeMenuToggleDimensions } = require('../js/index');
+
+test('test if each element exists', () => {
+  expect(hamburger).toBeInTheDocument();
+  expect(navMenu).toBeInTheDocument();
+})
 
 test('test if it is possible to add show class', () => {
   const show = addShow();

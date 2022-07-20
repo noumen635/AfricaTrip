@@ -124,7 +124,7 @@ pipeline {
 
             echo "Testing my website unit functions"
             // sh "npm install jest"
-            // sh "npm test"
+            sh "npm test"
 
           }
           
@@ -210,6 +210,7 @@ pipeline {
         withCredentials([string(credentialsId: 'DockerID', variable: 'Docker_PWD')]) {
           sh "docker login -u noumendarryl -p ${Docker_PWD}"
         }
+        
         sh "docker push noumendarryl/africatrip:v1.${BUILD_NUMBER}"
         sh "docker push noumendarryl/africatrip:latest"
 
@@ -323,7 +324,7 @@ pipeline {
 
             echo "Testing UI expectations"
             // sh "npm install --save selenium-webdriver chromedriver geckodriver" 
-            // sh "node ./js/UI.js" 
+            sh "node ./js/UI.js" 
 
           }
           
